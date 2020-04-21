@@ -1,7 +1,9 @@
 
 // import FspaceUI from '../../packages'
+import FsInput from '../../packages/src/input/input'
  
 export default ({
+  Vue
 }) => {
-  // Vue.use(FspaceUI)
+  Vue.component(FsInput.name, FsInput)
 }

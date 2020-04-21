@@ -41,6 +41,7 @@ export default class FsInput extends Vue {
   }
 
   private get inputDisabled(): boolean {
+    console.log(this.disabled)
     return this.disabled;
   }
 
@@ -81,7 +82,7 @@ export default class FsInput extends Vue {
   private setShowClear() {
     this.showClear = this.clearable && this.focused && !!this.innerValue && !this.readonly && !this.showPassword
   }
-
+  //   disabled={this.inputDisabled ? 'disabled' : ''}
   private render() {
     return (
       <div class='fs-input'>

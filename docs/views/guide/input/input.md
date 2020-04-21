@@ -6,8 +6,7 @@ lang="zh"
 
 ## 基础用法
 
-<div>
-</div>
+<fs-input v-model="msg" />
 
 <script>
 export default {
@@ -47,13 +46,6 @@ export default {
 </script>
 ```
 
-## 禁用状态
-
-<fs-input :disable="true"></fs-input>
-
-```vue
-<fs-input :disable="true"></fs-input>
-```
 
 ## 可清空
 
@@ -63,12 +55,10 @@ export default {
 <fs-input :clearable="true"></fs-input>
 ```
 
-## 自定义宽度
+## 展示密码
 
-可以在自己设置 Input 的宽度。
-
-<fs-input value="Custom width" :width="150"></fs-input>
+<fs-input type="password" value="password" :show-password="true"></fs-input>
 
 ```vue
-<fs-input value="Custom width" :width="150"></fs-input>
+<fs-input value="password" :show-password="true"></fs-input>
 ```
