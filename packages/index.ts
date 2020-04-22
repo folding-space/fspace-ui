@@ -1,7 +1,11 @@
 import FsInput from './src/input'
+import FsForm from './src/form'
+import FsFormItem from './src/form-item'
 
 const components = [
-    FsInput
+    FsInput,
+    FsForm,
+    FsFormItem
 ]
 
 const install: any = function (Vue: any) {
@@ -15,5 +19,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
     install,
-    FsInput
+    FsInput,
+    FsForm,
+    FsFormItem
 };
