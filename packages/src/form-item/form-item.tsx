@@ -10,17 +10,29 @@ export default class FsFormItem extends Vue {
     @Prop({ type: String, required: false, default: '' })
     private readonly label!: string;
 
+    private mounted() {
+        this.$on('on-form-change', this.onFiledChange)
+        this.$on('on-form-blur', this.onFiledBlur)
+    }
+
+
+    private onFiledChange() {
+
+    }
+
+    private onFiledBlur() {
+
+    }
+
     private render() {
 
-        const { $slots , $props} = this
-        console.log($slots, $props)
+        const { $slots, $props } = this
 
         return (
-            <form
-            >
-                {this.label !=='' ? <label>{ this.label }</label> : null} 
+            <div>
+                {this.label !== '' ? <label>{this.label}</label> : null}
                 {this.$slots.default}
-            </form>
+            </div>
         )
     }
 
