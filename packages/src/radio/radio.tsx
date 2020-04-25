@@ -9,10 +9,17 @@ export default class FsRadio extends Vue {
     @Prop({ type: [String, Number], required: false, default: '' })
     private readonly value!: string;
 
+    @Prop({ type: Boolean, required: false, default: false })
+    private readonly disabled!: boolean;
+
     @Prop({ type: String, required: false, default: '' })
     private readonly name!: string;
 
     private innerValue: string = ''
+
+    private get radioDisabled(): boolean {
+        return this.disabled;
+      }
 
     private created() {
     }
@@ -28,11 +35,11 @@ export default class FsRadio extends Vue {
 
     private render() {
         return (
-            <label class={this.label==this.value? 'fs-radio is-checked' : 'fs-radio'}>
-                {this.innerValue}
+            <label class={this.label==this.value? 'fs-radio is-checked' : 'fs-radio' }>
+                {/* {this.innerValue} */}
                 <span class="fs-radio__input">
                     <span class="fs-radio__inner"></span>
-                    <input class="fs-radio__original" type="radio" value={this.label} name={this.name} v-model={this.model} />
+                    <input class="fs-radio__original" disabled= {this.radioDisabled} type="radio" value={this.label} name={this.name} v-model={this.model} />
                 </span>
                 <span class="fs-radio__label">
                     {this.$slots.default ? <slot>{this.$slots.default}</slot> : <span>{this.label}</span>}

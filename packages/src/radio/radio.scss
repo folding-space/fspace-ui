@@ -47,6 +47,17 @@
                 transition: transform .15s ease-in;
             }
         }
+        &.is-disabled {
+            .fs-radio__inner{
+                background-color: #f5f7fa;
+                border-color: #e4e7ed;
+                cursor: not-allowed;
+                &:after {
+                    cursor: not-allowed;
+                    background-color: #f5f7fa;
+                }
+            }
+        }
         & input {
             opacity: 0;
             outline: none;
