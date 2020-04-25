@@ -49,6 +49,7 @@ module.exports = {
         title: '组件',
         children: [
           ['/views/guide/input/input.md', 'input'],
+          ['/views/guide/button/button.md', 'button'],
         ]
       }
     ]
