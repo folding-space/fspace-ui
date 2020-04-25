@@ -25,7 +25,7 @@ export default class FsForm extends Vue {
 
     }
 
-    private render(h): VNode {
+    private render(h:any): VNode {
         const { $slots, $attrs } = this;
         return h('form', {
             attrs: {
