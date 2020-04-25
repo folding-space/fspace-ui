@@ -25,8 +25,10 @@ export default {
   },
   methods: {
     btnClick() {
-      this.loading ? this.loading = false : this.loading = true
-      console.log('点你mei~')
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
     }
   }
 };
@@ -97,12 +99,12 @@ export default {
 ## 加载按钮
 
 <div style="margin-top: 10px;">
-  <fs-button loading style="margin-right: 5px;">NORMAL</fs-button>
-  <fs-button loading style="margin-right: 5px;" type="primary">PRIMARY</fs-button>
-  <fs-button loading style="margin-right: 5px;" type="success">SUCCESS</fs-button>
-  <fs-button loading style="margin-right: 5px;" type="info">INFO</fs-button>
+  <fs-button :loading="loading" style="margin-right: 5px;" @click="btnClick">NORMAL</fs-button>
+  <fs-button :loading="loading" style="margin-right: 5px;" @click="btnClick" type="primary">PRIMARY</fs-button>
+  <fs-button :loading="loading" style="margin-right: 5px;" @click="btnClick" type="success">SUCCESS</fs-button>
+  <fs-button :loading="loading" style="margin-right: 5px;" @click="btnClick" type="info">INFO</fs-button>
   <fs-button loading style="margin-right: 5px;" type="warning">WARNING</fs-button>
-  <fs-button loading style="margin-right: 5px;" type="danger">DANGER</fs-button>
+  <fs-button loading style="margin-right: 5px;" type="danger">DANGER</fs-button>  
   <fs-button loading disabled style="margin-right: 5px;">DISABLED</fs-button>
 </div>
 
