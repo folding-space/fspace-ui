@@ -50,6 +50,7 @@ module.exports = {
         children: [
           ['/views/guide/input/input.md', 'input'],
           ['/views/guide/radio/radio.md', 'Radio'],
+          ['/views/guide/button/button.md', 'button'],
         ]
       }
     ]

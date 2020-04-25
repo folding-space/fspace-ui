@@ -6,7 +6,9 @@
 @include b(input) {
     position: relative;
     width: 250px;
-    height: 35px;
+    height: auto;
+    min-height: 35px;
+   
 
     &__inner {
         position: absolute;
@@ -21,24 +23,43 @@
             border: 1px solid $--color-info;
             border-radius: 1px solid $--color-info;
         }
-    }
-      
-    &__inner-clear-icon {
-        position: absolute;
-        top: 50%; 
-        right: 1px;
-        -webkit-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-        transform: translate(0,-50%);
-    }
 
-    &__inner-left-icon {
-        top: 50%; 
-        position: absolute;
-        right: 1px;
-        -webkit-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-        transform: translate(0,-50%);
+        &-icon {
+            position: absolute;
+            top: 50%; 
+            right: 1px;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(0,-50%);
+        }
     }
 }
 
+
+@include b(textarea) {
+    width: auto;
+    position: relative;
+
+    &__inner {
+        padding: 5px;
+        outline:none;  
+        border-radius: 10px;
+        border: 1px solid #eeeeee;
+
+        &:focus{
+            border: 1px solid $--color-info;
+            border-radius: 1px solid $--color-info;
+        }
+
+        
+    }
+
+    &__count {
+        color: #909399;
+        background: #fff;
+        position: absolute;
+        font-size: 12px;
+        bottom: 5px;
+        right: 10px;
+    }
+}

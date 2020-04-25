@@ -15,8 +15,6 @@ export default class FsRadio extends Vue {
     private innerValue: string = ''
 
     private created() {
-        // console.log('saj ',this.value)
-        // this.innerValue = this.value;
     }
 
     
@@ -25,15 +23,8 @@ export default class FsRadio extends Vue {
     }
     
     public set model(v : any) {
-        // console.log('sdjasjs',v)
         this.$emit('input', v);
-        // this.innerValue = v;
     }
-    
-
-    // private onInput(e: Event) {
-    //     this.$emit('input', this.innerValue);
-    // }
 
     private render() {
         return (
