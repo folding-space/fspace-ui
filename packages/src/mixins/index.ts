@@ -1,4 +1,3 @@
-
 // @ts-nocheck
 import { Component, Vue, Prop } from 'vue-property-decorator';
 
@@ -37,4 +36,5 @@ export default class Mixins extends Vue {
     private broadcast(componentName, eventName, params) {
         broadcast.call(this, componentName, eventName, params);
     }
-}
+
+  }
