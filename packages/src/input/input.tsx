@@ -1,78 +1,60 @@
-import {Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 import './input.scss'
 import { VNode } from 'vue/types/umd';
-import makeExpandingArea  from './makeExpandingArea/index'
+import { PropTypes } from '../utils/vue-types'
+import makeExpandingArea from './makeExpandingArea/index'
 import Mixins from '../mixins/index'
 
+const inputProps = Vue.extend({
+  props: {
+    type: PropTypes.string,
+    disabled: PropTypes.bool,
+    readonly: PropTypes.bool,
+    autosize: PropTypes.bool,
+    placeholder: PropTypes.bool,
+    clearable: PropTypes.bool,
+    maxlength: PropTypes.number,
+    minlength: PropTypes.number,
+    showPassword: PropTypes.bool,
+    rows: PropTypes.number,
+    cols: PropTypes.number,
+  },
+});
 
 @Component({
   mixins: [Mixins]
 })
-export default class FsInput extends Vue {
+export default class FsInput extends inputProps {
 
-  private dispatch!: Function
+  dispatch!: Function
 
-  @Prop({ type: String, required: false, default: 'text' })
-  private readonly type!: string;
+  innerValue = '';
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly disabled!: boolean;
+  focused = false;
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly readonly!: boolean;
+  showClear = false;
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly autosize!: boolean;
+  showPsd = false;
 
-  @Prop({ type: String, required: false, default: '请输入内容' })
-  private readonly placeholder!: string;
-
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly clearable!: boolean;
-
-  @Prop({ type: Number, required: false, default: -1 })
-  private readonly maxlength!: number;
-
-  @Prop({ type: Number, required: false, default: -1 })
-  private readonly minlength!: number;
-
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly showPassword!: boolean;
-
-  @Prop({ type: Number, required: false, default: 3 })
-  private readonly rows!: number;
-
-  @Prop({ type: Number, required: false, default: 80 })
-  private readonly cols!: number;
-
-  private innerValue = '';
-
-  private focused = false;
-
-  private showClear = false;
-
-  private showPsd = false;
-
-  private created() {
-    // console.log(this.$attrs)
+  created() {
     this.innerValue = this.$attrs.value;
   }
 
-  private get inputDisabled(): boolean {
+  get inputDisabled(): boolean {
     return this.disabled;
   }
 
-  private get inputShowPassword(): boolean {
+  get inputShowPassword(): boolean {
     return this.type == 'password' && this.showPassword
   }
 
-  private mounted() {
+  mounted() {
     if (this.autosize) {
       makeExpandingArea(this.$refs.textarea)
     }
   }
 
-  private onInput(e: Event) {
+  onInput(e: Event) {
     const { value = '' }: any = e.target || {};
     this.innerValue = value;
     this.setShowClear();
@@ -80,49 +62,49 @@ export default class FsInput extends Vue {
     this.dispatch('FsFormItem', 'on-form-change', value)
   }
 
-  private onFocus(e: Event) {
+  onFocus(e: Event) {
     this.focused = true;
     this.setShowClear();
     this.$emit('focus', e);
   }
 
-  private onBlur(e: Event) {
+  onBlur(e: Event) {
     this.focused = false;
     this.setShowClear();
     this.$emit('blur', e);
   }
 
-  private onClear() {
+  onClear() {
     this.innerValue = '';
     this.focused = false;
     this.setShowClear();
     this.$emit('input', this.innerValue);
   }
 
-  private onShowPassword() {
+  onShowPassword() {
     this.showPsd = !this.showPsd;
   }
 
-  private setShowClear() {
+  setShowClear() {
     this.showClear = this.clearable && this.focused && !!this.innerValue && !this.readonly && !this.showPassword
   }
 
-  private rIcon(t: string): string {
-   return `fs-input__inner-icon icon iconfont icon-icon-test${t}`
+  rIcon(t: string): string {
+    return `fs-input__inner-icon icon iconfont icon-icon-test${t}`
   }
 
-  private rSpan(type: string): VNode | null {
-      return (
-        <div>
-          { this.showClear ? <span class={ this.rIcon('44') } onmousedown={this.onClear} /> : null  } 
-          { this.inputShowPassword ?  <span class={ this.rIcon(this.showPsd ? '1' : '')} onmousedown={this.onShowPassword} /> : null } 
-          { type == 'textarea' && this.maxlength > 0 ? <span class="fs-textarea__count"> {this.innerValue.length} / {this.maxlength} </span> : null}
-        </div>
-      )
+  rSpan(type: string): VNode | null {
+    return (
+      <div>
+        {this.showClear ? <span class={this.rIcon('44')} onmousedown={this.onClear} /> : null}
+        {this.inputShowPassword ? <span class={this.rIcon(this.showPsd ? '1' : '')} onmousedown={this.onShowPassword} /> : null}
+        {type == 'textarea' && this.maxlength > 0 ? <span class="fs-textarea__count"> {this.innerValue.length} / {this.maxlength} </span> : null}
+      </div>
+    )
   }
 
-  private rInput(): VNode {
-    const { $parent } = this 
+  rInput(): VNode {
+    const { $parent } = this
     return (
       <div class='fs-input'>
         <input
@@ -139,12 +121,12 @@ export default class FsInput extends Vue {
           onBlur={this.onBlur}
         >
         </input>
-        { this.rSpan('input') }
+        {this.rSpan('input')}
       </div>
     );
   }
 
-  private rTextarea(): VNode {
+  rTextarea(): VNode {
     return (
       <div class='fs-textarea'>
         <textarea
@@ -164,12 +146,12 @@ export default class FsInput extends Vue {
           cols={this.cols}
         >
         </textarea>
-        { this.rSpan('textarea') }
+        {this.rSpan('textarea')}
       </div>
     )
   }
 
-  private render() {
+  render() {
     if (this.type == 'textarea') {
       return this.rTextarea()
     }

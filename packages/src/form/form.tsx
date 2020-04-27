@@ -62,7 +62,6 @@ export default class FsForm extends Vue {
         const { $slots, $attrs } = this
         return <div>
             {$slots.default}
-            {/* {$slots.default} */}
         </div>
     }
 

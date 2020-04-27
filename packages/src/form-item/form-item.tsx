@@ -31,6 +31,10 @@ export default class FsFormItem extends Vue {
 
   private validateMessage: string = ''
 
+  private get filedValue() {
+    return this.form.model[this.prop]
+  }
+
   private mounted() {
     if (this.prop) {
       this.dispatch('FsForm', 'on-form-item-add', this)
@@ -59,10 +63,6 @@ export default class FsFormItem extends Vue {
 
   private beforeDestroy() {
     this.dispatch('FsForm', 'on-form-item-destroy', this)
-  }
-
-  private get filedValue() {
-    return this.form.model[this.prop]
   }
 
   private validate(_trigger: any, cb: Function) {

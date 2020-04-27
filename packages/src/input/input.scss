@@ -17,7 +17,7 @@
         outline:none;  
         border: 1px solid #eeeeee;
 
-        $border-color: darken($startcolor); 
+        // $border-color: darken($startcolor); 
 
         &:focus{
             border: 1px solid $--color-info;
