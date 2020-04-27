@@ -54,6 +54,7 @@ export default class FsInput extends Vue {
   private showPsd = false;
 
   private created() {
+    // console.log(this.$attrs)
     this.innerValue = this.$attrs.value;
   }
 
@@ -121,6 +122,7 @@ export default class FsInput extends Vue {
   }
 
   private rInput(): VNode {
+    const { $parent } = this 
     return (
       <div class='fs-input'>
         <input

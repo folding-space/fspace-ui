@@ -1,5 +1,5 @@
-import FsInput from './src/input'
-import FsForm from './src/form'
+import FsInput from './src/input/input'
+import FsForm from './src/form/form'
 import FsFormItem from './src/form-item'
 import FsRadio from './src/radio'
 import FsRadioGroup from './src/radio-group'

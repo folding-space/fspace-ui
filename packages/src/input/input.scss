@@ -6,8 +6,7 @@
 @include b(input) {
     position: relative;
     width: 250px;
-    height: auto;
-    min-height: 35px;
+    height: 35px;
    
 
     &__inner {
