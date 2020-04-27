@@ -6,8 +6,6 @@ import { VNode } from 'vue/types/umd';
 @Component
 export default class FsForm extends Vue {
 
-  
-
     @Prop({ type: String, required: false, default: 'horizontal' })
     private readonly layout!: string;
 
@@ -26,15 +24,12 @@ export default class FsForm extends Vue {
 
 
     private created() {
-        console.log(this.$attrs)
         this.$on('on-form-item-add', (filed: any) => {
-            console.log('form-item-add')
             if (filed)
                 this.fileds.push(filed)
         })
 
         this.$on('on-form-item-destroy', (filed: any) => {
-            console.log('form-item-destroy')
             if (filed.prop)
                 this.fileds.splice(this.fileds.indexOf(filed), 1)
         })
@@ -42,7 +37,7 @@ export default class FsForm extends Vue {
 
     private resetFileds() {
         this.fileds.forEach((filed: any) => {
-            filed.resetFileds()
+            filed.resetFiled()
         })
     }
 
@@ -65,10 +60,10 @@ export default class FsForm extends Vue {
 
     private render(h: any): VNode {
         const { $slots, $attrs } = this
-
-        return <form>
+        return <div>
             {$slots.default}
-        </form>
+            {/* {$slots.default} */}
+        </div>
     }
 
 }

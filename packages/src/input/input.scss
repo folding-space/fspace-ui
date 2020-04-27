@@ -7,7 +7,6 @@
     position: relative;
     width: 250px;
     height: 35px;
-   
 
     &__inner {
         position: absolute;
@@ -17,6 +16,8 @@
         padding-left: 10px;
         outline:none;  
         border: 1px solid #eeeeee;
+
+        $border-color: darken($startcolor); 
 
         &:focus{
             border: 1px solid $--color-info;
