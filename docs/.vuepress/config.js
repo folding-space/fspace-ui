@@ -48,9 +48,9 @@ module.exports = {
       {
         title: '组件',
         children: [
-          ['/views/guide/input/input.md', 'input'],
+          ['/views/guide/input/input.md', 'Input'],
+          ['/views/guide/button/button.md', 'Button'],
           ['/views/guide/radio/radio.md', 'Radio'],
-          ['/views/guide/button/button.md', 'button'],
         ]
       }
     ]

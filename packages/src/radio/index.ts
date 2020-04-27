@@ -1,4 +1,4 @@
-import FRadio from './radio'
+import FRadio from './radio';
 
-export { FRadio }
-export default FRadio
+export { FRadio  }
+export default FRadio 

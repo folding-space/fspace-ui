@@ -90,4 +90,39 @@
             color: #409eff;
         }
     }
+
+&.is-disabled.is-checked {
+    .fs-radio__input {
+        .fs-radio__inner {
+            background-color: #f5f7fa;
+            border-color: #e4e7ed;
+            &:after {
+                background-color: #c0c4cc;
+            }
+        }
+    }
+}
+    &.is-disabled {
+        .fs-radio__input{
+            .fs-radio__inner {
+            background-color: #f5f7fa;
+            border-color: #e4e7ed;
+            cursor: not-allowed;
+            &:after {
+                cursor: not-allowed;
+                background-color: #f5f7fa;
+            }
+        }
+        }
+        .fs-radio__label {
+            color: #c0c4cc;
+            cursor: not-allowed
+        }
+    }
+}
+.el-radio-group {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 0;
 }
