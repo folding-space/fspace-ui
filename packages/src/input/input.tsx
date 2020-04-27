@@ -1,17 +1,16 @@
-import { Component, Vue, Prop,  } from 'vue-property-decorator';
-import Mixins from '../mixins/index'
-
+import {Vue, Component, Prop } from 'vue-property-decorator';
 import './input.scss'
 import { VNode } from 'vue/types/umd';
+import makeExpandingArea  from './makeExpandingArea/index'
+import Mixins from '../mixins/index'
 
-let win: any = window
 
 @Component({
-  // mixins: [Mixins]
+  mixins: [Mixins]
 })
 export default class FsInput extends Vue {
 
-  private readonly dispatch!: Function;
+  private dispatch!: Function
 
   @Prop({ type: String, required: false, default: 'text' })
   private readonly type!: string;
@@ -68,18 +67,16 @@ export default class FsInput extends Vue {
 
   private mounted() {
     if (this.autosize) {
-      this.makeExpandingArea(this.$refs.textarea)
+      makeExpandingArea(this.$refs.textarea)
     }
   }
-
- 
 
   private onInput(e: Event) {
     const { value = '' }: any = e.target || {};
     this.innerValue = value;
     this.setShowClear();
     this.$emit('input', this.innerValue);
-    // this.dispatch('FsFormItem', 'on-form-change', value)
+    this.dispatch('FsFormItem', 'on-form-change', value)
   }
 
   private onFocus(e: Event) {
@@ -109,45 +106,6 @@ export default class FsInput extends Vue {
     this.showClear = this.clearable && this.focused && !!this.innerValue && !this.readonly && !this.showPassword
   }
 
-  private makeExpandingArea(el: Element | any) {
-    let timer: number | null = null;
-
-    let setStyle = function (el: Element | any, auto?: number | undefined) {
-      if (auto) el.style.height = 'auto';
-      el.style.height = el.scrollHeight + 'px';
-    }
-    let delayedResize = function (el: Element) {
-      if (timer) {
-        clearTimeout(timer);
-        timer = null;
-      }
-      timer = setTimeout(function () {
-        setStyle(el)
-      }, 200);
-    }
-    if (el.addEventListener) {
-      el.addEventListener('input', function () {
-        setStyle(el, 1);
-      }, false);
-      setStyle(el)
-    } else if (el.attachEvent) {
-      el.attachEvent('onpropertychange', function () {
-        setStyle(el)
-      })
-      setStyle(el)
-    }
-    if (window.VBArray && window.addEventListener) { //IE9
-      el.attachEvent("onkeydown", function () {
-        let key = win.event.keyCode;
-        if (key == 8 || key == 46) delayedResize(el);
-
-      });
-      el.attachEvent("oncut", function () {
-        delayedResize(el);
-      }); //处理粘贴
-    }
-  }
-
   private rIcon(t: string): string {
    return `fs-input__inner-icon icon iconfont icon-icon-test${t}`
   }
@@ -155,7 +113,7 @@ export default class FsInput extends Vue {
   private rSpan(type: string): VNode | null {
       return (
         <div>
-          { this.showClear ? <span class={ this.rIcon('44') } onmousedown={this.onClear} /> : ''  } 
+          { this.showClear ? <span class={ this.rIcon('44') } onmousedown={this.onClear} /> : null  } 
           { this.inputShowPassword ?  <span class={ this.rIcon(this.showPsd ? '1' : '')} onmousedown={this.onShowPassword} /> : null } 
           { type == 'textarea' && this.maxlength > 0 ? <span class="fs-textarea__count"> {this.innerValue.length} / {this.maxlength} </span> : null}
         </div>

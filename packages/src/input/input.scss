@@ -39,6 +39,7 @@
 @include b(textarea) {
     width: auto;
     position: relative;
+    display: inline-block;
 
     &__inner {
         padding: 5px;
@@ -59,7 +60,7 @@
         background: #fff;
         position: absolute;
         font-size: 12px;
-        bottom: 5px;
+        bottom: 10px;
         right: 10px;
     }
 }

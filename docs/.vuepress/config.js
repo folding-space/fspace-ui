@@ -54,15 +54,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    [
-      'vuepress-plugin-typescript',
-      {
-        tsLoaderOptions: {
-          // ts-loader 的所有配置项
-        },
-      },
-    ],
-  ],
+  }
 }
