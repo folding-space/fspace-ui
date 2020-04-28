@@ -2,11 +2,6 @@
 @import '../../styles/mixins/mixins';
 @import '../../styles/common/var';
 
-@function propsStyle($width,$marginTop){
-  width:$width;
-  margin-top: $marginTop;
-}
-
 
 .hm-dialog__wrapper {
   position: fixed;

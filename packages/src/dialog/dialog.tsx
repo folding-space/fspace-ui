@@ -1,8 +1,12 @@
 import {Component, Vue, Prop} from 'vue-property-decorator';
 import './dialog.scss'
 import {VNode} from 'vue/types/umd';
+import FSpaceUI from '../../../packages'
+@Component({
+    components:{
+    }
+})
 
-@Component
 
 export default class FsDialog extends Vue {
     /**
@@ -14,7 +18,7 @@ export default class FsDialog extends Vue {
     /**
      * Dialog 的标题
      */
-    @Prop({type: String, required: false, default: ''})
+    @Prop({type: String, required: false, default: '提示'})
     private readonly title!: string;
     /**
      * Dialog 的宽度
@@ -101,6 +105,12 @@ export default class FsDialog extends Vue {
     private beforeClose(done: any) {
     }
 
+    /**
+     * Dialog 关闭的按钮图标
+     */
+    @Prop({type: String, required: false, default: ''})
+    private readonly closeIcon!: string;
+
 
     /**
      * Dialog 打开的回调
@@ -136,13 +146,27 @@ export default class FsDialog extends Vue {
     private handleClose() {
         this.$emit("update:visible", false)
     }
-
     private rDialog(): VNode {
         return (
             <transition class='dialog-fade'>
-                {this.visible ? <div class='hm-dialog__wrapper' onclick={this.handleClose}>
-                    <div class={`hm-dialog propsStyle(${this.width},${this.top})`} >
-                        <div class="hm-dialog__header"></div>
+                {this.visible ? <div class='fs-dialog__wrapper' onclick={this.handleClose}>
+                    <div class='fs-dialog' style={`width:${this.width};margin-top:${this.top}`}>
+                        <div class="fs-dialog__header">
+                            <span class="fs-dialog__title">{this.$slots.title?this.$slots.title:this.title}</span>
+                            {this.closeIcon ? (<button class='fs-dialog__headerbtn' onclick={this.handleClose}>
+                                <i class={this.closeIcon}></i>)}
+                            </button>) : null}
+                        </div>
+                        <div class="fs-dialog__body">{this.$slots.default}</div>
+                        <div class="fs-dialog__footer">{this.$slots.footer?(this.$slots.footer):(
+                           <span>
+                                <fs-button type='primary'>取消</fs-button>
+                                <fs-button type='primary'>确认</fs-button>
+                           </span>
+                        )}</div>
+
+
+
                     </div>
                 </div> : null}
             </transition>
