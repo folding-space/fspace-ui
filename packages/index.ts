@@ -1,11 +1,17 @@
-import FsInput from './src/input'
-import FsForm from './src/form'
+import FsInput from './src/input/input'
+import FsForm from './src/form/form'
 import FsFormItem from './src/form-item'
+import FsRadio from './src/radio'
+import FsRadioGroup from './src/radio-group'
+import FsRadioButton from './src/radio-button'
 
 const components = [
     FsInput,
     FsForm,
-    FsFormItem
+    FsFormItem,
+    FsRadioGroup,
+    FsRadio,
+    FsRadioButton
 ]
 
 const install: any = function (Vue: any) {
@@ -21,5 +27,8 @@ export default {
     install,
     FsInput,
     FsForm,
-    FsFormItem
+    FsFormItem,
+    FsRadioGroup,
+    FsRadio,
+    FsRadioButton
 };

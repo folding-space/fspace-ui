@@ -1,0 +1,25 @@
+@charset "utf-8";
+@import '../../styles/mixins/mixins';
+@import '../../styles/common/var';
+
+@include b(form-item) {
+    position: relative;
+    width: 300px;
+    min-height: 65px;
+
+    &__content {
+        display: inline-flex;
+
+        &-label {
+            min-width: 30%;
+        }
+    }
+
+    &__error {
+        position: absolute;
+        bottom: 0px;
+        left: 30%;
+        font-size: 12px;
+        color: $--color-danger;
+    }
+}

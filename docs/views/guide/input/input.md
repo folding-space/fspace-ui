@@ -6,6 +6,8 @@ lang="zh"
 
 ## 基础用法
 &nbsp;
+<div>
+</div>
 <fs-input v-model="msg" />
 
 <script>
@@ -69,5 +71,5 @@ export default {
 <fs-input type="textarea" :cols="80" :maxlength="500" autosize value="用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电" />
 
 ```vue
-<fs-input type="textarea" :cols="80" :maxlength="100" autosize value="用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电"></fs-input>
+<fs-input type="textarea" :cols="80" :maxlength="500" autosize value="用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电用爱发电"></fs-input>
 ```

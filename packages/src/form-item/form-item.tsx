@@ -1,39 +1,119 @@
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Inject } from 'vue-property-decorator';
+import Mixins from '../mixins/index'
+import AsyncValidator from 'async-validator'
 import './form-item.scss'
 
-@Component
+interface rule {
+  message?: string,
+  required?: boolean,
+  trigger?: string
+}
+
+@Component({
+  mixins: [Mixins]
+})
 export default class FsFormItem extends Vue {
 
-    @Prop({ type: String, required: false, default: '' })
-    private readonly prop!: string;
+  @Inject()
+  form!: any;
 
-    @Prop({ type: String, required: false, default: '' })
-    private readonly label!: string;
+  private dispatch!: Function
 
-    private mounted() {
-        this.$on('on-form-change', this.onFiledChange)
-        this.$on('on-form-blur', this.onFiledBlur)
+  @Prop({ type: String, required: false, default: '' })
+  private readonly prop!: string;
+
+  @Prop({ type: String, required: false, default: '' })
+  private readonly label!: string;
+
+  private isRequired: boolean = false
+
+  private validateState: string = ''
+
+  private validateMessage: string = ''
+
+  private get filedValue() {
+    return this.form.model[this.prop]
+  }
+
+  private mounted() {
+    if (this.prop) {
+      this.dispatch('FsForm', 'on-form-item-add', this)
+
+      this.setRules()
+    }
+  }
+
+  private setRules() {
+    const rules = this.getCurrentRule()
+    if (rules.length > 0) {
+      rules.every((rule: rule) => {
+        this.isRequired = rule.required;
+      });
     }
 
+    this.$on('on-form-change', this.onFiledChange)
+    this.$on('on-form-blur', this.onFiledBlur)
+  }
 
-    private onFiledChange() {
+  private getCurrentRule() {
+    const formRules = this.form.rules
+    let rules = formRules ? formRules[this.prop] : []
+    return rules
+  }
 
+  private beforeDestroy() {
+    this.dispatch('FsForm', 'on-form-item-destroy', this)
+  }
+
+  private validate(_trigger: any, cb: Function) {
+    const rules = this.getCurrentRule()
+
+    if (rules.length === 0) return true
+    
+    let desc = {
+      [this.prop]: rules
     }
-
-    private onFiledBlur() {
-
+    const validator = new AsyncValidator(desc)
+    let model = {
+      [this.prop]: this.filedValue
     }
+    // @ts-ignore
+    validator.validate(model, { firstFields: true }, err => {
+      this.validateState = err ? 'error' : 'success'
+      this.validateMessage = err ? err[0].message : ''
+      // @ts-ignore
+      // cb(this.validateState, this.validateMessage)
+    })
+  }
 
-    private render() {
+  onFiledChange() {
+    this.validate('change', (state: string, msg: string) => {
+      console.log(state)
+    })
+  }
 
-        const { $slots, $props } = this
+  onFiledBlur() {
+    this.validate('blur', () => {
 
-        return (
-            <div>
-                {this.label !== '' ? <label>{this.label}</label> : null}
-                {this.$slots.default}
-            </div>
-        )
-    }
+    })
+  }
+
+  resetFiled() {
+    this.validateState = ''
+    this.validateMessage = ''
+  }
+
+  private render() {
+    const { $slots, $props } = this
+    return (
+      <div class="fs-form-item">
+        <div class="fs-form-item__content">
+          {this.label !== '' ? <label class="fs-form-item__content-label">{this.label}</label> : null}
+          {this.$slots.default}
+        </div>
+        { this.validateState == 'error' ? <span class="fs-form-item__error">{ this.validateMessage }</span> : null } 
+      </div>
+    )
+  }
 
 }
