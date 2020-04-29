@@ -4,6 +4,8 @@ import FsFormItem from './src/form-item'
 import FsRadio from './src/radio'
 import FsRadioGroup from './src/radio-group'
 import FsRadioButton from './src/radio-button'
+import FsCheckbox from './src/checkbox'
+import FsCheckboxGroup from './src/checkbox-group'
 
 const components = [
     FsInput,
@@ -11,7 +13,9 @@ const components = [
     FsFormItem,
     FsRadioGroup,
     FsRadio,
-    FsRadioButton
+    FsRadioButton,
+    FsCheckbox,
+    FsCheckboxGroup
 ]
 
 const install: any = function (Vue: any) {
@@ -30,5 +34,7 @@ export default {
     FsFormItem,
     FsRadioGroup,
     FsRadio,
-    FsRadioButton
+    FsRadioButton,
+    FsCheckbox,
+    FsCheckboxGroup
 };

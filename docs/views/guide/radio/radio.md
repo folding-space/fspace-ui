@@ -17,7 +17,7 @@ export default {
     return {
       gender: '0',
       gender1: '0',
-      gender2: '0'
+      gender2: '1',
     }
   },
   methods: {
@@ -28,8 +28,8 @@ export default {
 
 ```vue
 <template>
-    <fs-radio label="1" v-model="gender" name="单选项1">单选项</fs-radio>
-    <fs-radio label="0" v-model="gender" name="单选项2">单选项</fs-radio>
+    <fs-radio label="0" v-model="gender" name="单选项1">单选项</fs-radio>
+    <fs-radio label="1" v-model="gender" name="单选项2">单选项</fs-radio>
 </template>
 ```
 

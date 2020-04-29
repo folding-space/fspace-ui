@@ -1,10 +1,6 @@
 import { Component, Vue, Prop , Provide } from 'vue-property-decorator';
-import './radio.scss'
-
 @Component
-export default class FsRadioGroup extends Vue {
-   private created() {
-    }
+export default class FsCheckboxGroup extends Vue {
     private render() {
         return (
             <div class="fs-radio-group">
