@@ -42,7 +42,7 @@ module.exports = {
         title: '简介',
         collapsable: false,
         children: [
-          '/', '/views/introduction/',
+          '/', '/views/introduction/', '/views/theme/'
         ]
       },
       {
@@ -51,6 +51,7 @@ module.exports = {
           ['/views/guide/input/input.md', 'Input'],
           ['/views/guide/button/button.md', 'Button'],
           ['/views/guide/radio/radio.md', 'Radio'],
+          ['/views/guide/checkbox/checkbox.md', 'Checkbox'],
           ['/views/guide/form/form.md', 'Form'],
           ['/views/guide/dialog/dialog.md', 'Dialog'],
         ]

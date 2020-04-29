@@ -23,6 +23,8 @@ export default {
       loading: false
     }
   },
+  created() {
+  },
   methods: {
     btnClick() {
       this.loading = true
@@ -49,6 +51,17 @@ export default {
 
 ## 图标按钮
 
+<div style="margin-top: 10px;">
+  <fs-button icon="icon-icon-test44"></fs-button>
+  <fs-button icon="icon-icon-test45" type="primary"></fs-button>
+  <fs-button icon="icon-icon-test46" type="success"></fs-button>
+  <fs-button icon="icon-icon-test47" type="info"></fs-button>
+  <fs-button icon="icon-icon-test48" type="warning">WARNING</fs-button>
+  <fs-button left icon="icon-icon-test49" type="danger">DANGER</fs-button>
+  <fs-button icon="icon-icon-test50" disabled>DISABLED</fs-button>
+</div>
+
+```vue
 <template>
   <fs-button icon="icon-icon-test44"></fs-button>
   <fs-button icon="icon-icon-test45" type="primary"></fs-button>
@@ -57,17 +70,6 @@ export default {
   <fs-button icon="icon-icon-test48" type="warning">WARNING</fs-button>
   <fs-button icon="icon-icon-test49" type="danger">DANGER</fs-button>
   <fs-button icon="icon-icon-test50" disabled>DISABLED</fs-button>
-</template>
-
-```vue
-<template>
-  <fs-button icon="icon-icon-test44"></fs-button>
-  <fs-button icon="icon-icon-test44" type="primary"></fs-button>
-  <fs-button icon="icon-icon-test44" type="success"></fs-button>
-  <fs-button icon="icon-icon-test44" type="info"></fs-button>
-  <fs-button icon="icon-icon-test44" type="warning">WARNING</fs-button>
-  <fs-button icon="icon-icon-test44" type="danger">DANGER</fs-button>
-  <fs-button icon="icon-icon-test44" disabled>DISABLED</fs-button>
 </template>
 ```
 
@@ -104,8 +106,7 @@ export default {
   <fs-button :loading="loading" style="margin-right: 5px;" @click="btnClick" type="success">SUCCESS</fs-button>
   <fs-button :loading="loading" style="margin-right: 5px;" @click="btnClick" type="info">INFO</fs-button>
   <fs-button loading style="margin-right: 5px;" type="warning">WARNING</fs-button>
-  <fs-button loading style="margin-right: 5px;" type="danger">DANGER</fs-button>  
-  <fs-button loading disabled style="margin-right: 5px;">DISABLED</fs-button>
+  <fs-button loading style="margin-right: 5px;" type="danger">DANGER</fs-button>
 </div>
 
 ```vue
@@ -116,6 +117,5 @@ export default {
   <fs-button loading type="info">INFO</fs-button>
   <fs-button loading type="warning">WARNING</fs-button>
   <fs-button loading type="danger">DANGER</fs-button>
-  <fs-button loading disabled>DISABLED</fs-button>
 </template>
 ```
