@@ -34,12 +34,12 @@ export default class FsRadio extends Vue {
     }
 
     public get model(): any {
-        return this.$parent.$attrs.value?this.$parent.$attrs.value: this.value
+        return this.$parent.$attrs.value||this.$parent.$attrs.value==''?this.$parent.$attrs.value: this.value
     }
 
     public set model(v: any) {
         this.$emit('input', v);
-        this.$parent.$attrs.value?this.$parent.$emit('input',v):this.$emit('input', v)
+        this.$parent.$attrs.value||this.$parent.$attrs.value==''?this.$parent.$emit('input',v):this.$emit('input', v)
     }
 
     private handleChange() {

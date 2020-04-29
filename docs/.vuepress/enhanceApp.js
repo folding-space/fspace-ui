@@ -7,6 +7,8 @@ import FsRadioButton from '../../packages/src/radio/radio-button'
 import FsButton from '../../packages/src/button/button'
 import FsForm from '../../packages/src/form/form'
 import FsFormItem from '../../packages/src/form-item/form-item'
+import FsCheckbox from '../../packages/src/checkbox'
+import FsCheckboxGroup from '../../packages/src/checkbox/checkbox-group'
 
 import FspaceUI from '../../packages/index'
 import { useTheme, addTheme, addCreateTheme } from '../../packages/src/theme/theme'
