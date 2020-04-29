@@ -1,4 +1,6 @@
 import FsInput from './src/input/input'
+import FsButton from './src/button/button'
+
 import FsForm from './src/form/form'
 import FsFormItem from './src/form-item'
 import FsRadio from './src/radio'
@@ -7,6 +9,7 @@ import FsRadioButton from './src/radio-button'
 
 const components = [
     FsInput,
+    FsButton,
     FsForm,
     FsFormItem,
     FsRadioGroup,
@@ -25,6 +28,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
     install,
+    FsButton,
     FsInput,
     FsForm,
     FsFormItem,

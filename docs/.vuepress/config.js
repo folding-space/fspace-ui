@@ -42,7 +42,7 @@ module.exports = {
         title: '简介',
         collapsable: false,
         children: [
-          '/', '/views/introduction/',
+          '/', '/views/introduction/', '/views/theme/'
         ]
       },
       {
