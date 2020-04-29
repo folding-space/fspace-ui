@@ -1,17 +1,21 @@
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, InjectReactive } from 'vue-property-decorator';
+import classNames from 'classnames';
 import './input.scss'
 import { VNode } from 'vue/types/umd';
 import { PropTypes } from '../utils/vue-types'
-import makeExpandingArea from './makeExpandingArea/index'
+import makeExpandingArea from './makeExpandingArea'
 import Mixins from '../mixins/index'
 
 const inputProps = Vue.extend({
+  mixins: [
+    Mixins
+  ],
   props: {
     type: PropTypes.string,
     disabled: PropTypes.bool,
     readonly: PropTypes.bool,
     autosize: PropTypes.bool,
-    placeholder: PropTypes.bool,
+    placeholder: PropTypes.string,
     clearable: PropTypes.bool,
     maxlength: PropTypes.number,
     minlength: PropTypes.number,
@@ -21,10 +25,10 @@ const inputProps = Vue.extend({
   },
 });
 
-@Component({
-  mixins: [Mixins]
-})
+@Component
 export default class FsInput extends inputProps {
+
+  @InjectReactive('123123') formItemValidateState!: boolean
 
   dispatch!: Function
 
@@ -46,6 +50,11 @@ export default class FsInput extends inputProps {
 
   get inputShowPassword(): boolean {
     return this.type == 'password' && this.showPassword
+  }
+
+  get validateState() {
+    console.log(this.formItemValidateState)
+    return this.formItemValidateState
   }
 
   mounted() {
@@ -89,26 +98,36 @@ export default class FsInput extends inputProps {
     this.showClear = this.clearable && this.focused && !!this.innerValue && !this.readonly && !this.showPassword
   }
 
-  rIcon(t: string): string {
-    return `fs-input__inner-icon icon iconfont icon-icon-test${t}`
+  getClassName(type: string, child: string = ''): string {
+    const prefix =  `fs-${type}${child}`
+    return classNames(prefix, {
+      [`${prefix}-error`]: this.validateState 
+    })
+  }
+
+  getClassIcon(icon: string) {
+    const prefix = 'fs-input'
+    return classNames({
+      [`${prefix}__inner-icon`]: true,
+      [`icon iconfont icon-icon-test${icon}`]: true
+    })
   }
 
   rSpan(type: string): VNode | null {
     return (
       <div>
-        {this.showClear ? <span class={this.rIcon('44')} onmousedown={this.onClear} /> : null}
-        {this.inputShowPassword ? <span class={this.rIcon(this.showPsd ? '1' : '')} onmousedown={this.onShowPassword} /> : null}
+        {this.showClear ? <span class={this.getClassIcon('icon')} onmousedown={this.onClear} /> : null}
+        {this.inputShowPassword ? <span class={this.getClassIcon(this.showPsd ? '1' : '')} onmousedown={this.onShowPassword} /> : null}
         {type == 'textarea' && this.maxlength > 0 ? <span class="fs-textarea__count"> {this.innerValue.length} / {this.maxlength} </span> : null}
       </div>
     )
   }
 
   rInput(): VNode {
-    const { $parent } = this
     return (
-      <div class='fs-input'>
+      <div class={this.getClassName('input')}>
         <input
-          class='fs-input__inner'
+          class={ this.getClassName('input', '__inner')}
           v-model={this.innerValue}
           maxlength={this.maxlength}
           minlength={this.minlength}
@@ -122,16 +141,17 @@ export default class FsInput extends inputProps {
         >
         </input>
         {this.rSpan('input')}
+      
       </div>
     );
   }
 
   rTextarea(): VNode {
     return (
-      <div class='fs-textarea'>
+      <div class={this.getClassName('textarea')}>
         <textarea
           ref="textarea"
-          class='fs-textarea__inner'
+          class={ this.getClassName('textarea', '__inner') }
           v-model={this.innerValue}
           maxlength={this.maxlength}
           minlength={this.minlength}
