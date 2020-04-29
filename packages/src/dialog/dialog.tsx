@@ -1,4 +1,4 @@
-import {Component, Vue, Prop} from 'vue-property-decorator';
+import {Component, Vue, Prop,Watch} from 'vue-property-decorator';
 import './dialog.scss'
 import {VNode} from 'vue/types/umd';
 import FSpaceUI from '../../../packages'
@@ -30,7 +30,7 @@ export default class FsDialog extends Vue {
      * 是否为全屏 Dialog
      */
     @Prop({type: Boolean, required: false, default: false})
-    private readonly fullscreen!: boolean;
+    private readonly fullscreen!: any;
 
     /**
      * Dialog CSS 中的 margin-top 值
@@ -98,6 +98,17 @@ export default class FsDialog extends Vue {
     @Prop({type: Boolean, required: false, default: true})
     private readonly destroyOnClose!: boolean;
 
+    @Watch('fullscreen',{immediate:true,deep:true})
+    getDialogWidthWathc(){
+        this.getDialogWidth()
+    }
+
+
+    private getDialogWidth(){
+        return this.fullscreen? "100%":this.width
+    }
+
+
     /**
      * 关闭前的回调，会暂停 Dialog 的关闭
      * @param done 用于关闭 Dialog
@@ -150,7 +161,7 @@ export default class FsDialog extends Vue {
         return (
             <transition class='dialog-fade'>
                 {this.visible ? <div class='fs-dialog__wrapper' onclick={this.handleClose}>
-                    <div class='fs-dialog' style={`width:${this.width};margin-top:${this.top}`}>
+                    <div class='fs-dialog' style={`width:${this.getDialogWidth()};margin-top:${this.top};`}>
                         <div class="fs-dialog__header">
                             <span class="fs-dialog__title">{this.$slots.title?this.$slots.title:this.title}</span>
                             {this.closeIcon ? (<button class='fs-dialog__headerbtn' onclick={this.handleClose}>
@@ -164,9 +175,6 @@ export default class FsDialog extends Vue {
                                 <fs-button type='primary'>确认</fs-button>
                            </span>
                         )}</div>
-
-
-
                     </div>
                 </div> : null}
             </transition>
