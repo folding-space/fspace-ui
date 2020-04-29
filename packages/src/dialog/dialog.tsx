@@ -1,14 +1,15 @@
 import {Component, Vue, Prop,Watch} from 'vue-property-decorator';
 import './dialog.scss'
-import {VNode} from 'vue/types/umd';
-import FSpaceUI from '../../../packages'
-@Component({
-    components:{
-    }
-})
 
 
+interface keyEvent {
+    keyCode: number
+    key: string
+}
+
+@Component
 export default class FsDialog extends Vue {
+
     /**
      * 是否显示dialog，支持.sync 修饰符
      */
@@ -18,7 +19,7 @@ export default class FsDialog extends Vue {
     /**
      * Dialog 的标题
      */
-    @Prop({type: String, required: false, default: '提示'})
+    @Prop({type: String, required: false, default: ''})
     private readonly title!: string;
     /**
      * Dialog 的宽度
@@ -30,7 +31,7 @@ export default class FsDialog extends Vue {
      * 是否为全屏 Dialog
      */
     @Prop({type: Boolean, required: false, default: false})
-    private readonly fullscreen!: any;
+    private readonly fullscreen!: false;
 
     /**
      * Dialog CSS 中的 margin-top 值
@@ -59,7 +60,7 @@ export default class FsDialog extends Vue {
     /**
      * 是否在 Dialog 出现时将 body 滚动锁定
      */
-    @Prop({type: Boolean, required: false, default: ''})
+    @Prop({type: Boolean, required: false, default: true})
     private readonly lockScroll!: boolean;
 
     /**
@@ -98,23 +99,25 @@ export default class FsDialog extends Vue {
     @Prop({type: Boolean, required: false, default: true})
     private readonly destroyOnClose!: boolean;
 
-    @Watch('fullscreen',{immediate:true,deep:true})
-    getDialogWidthWathc(){
-        this.getDialogWidth()
-    }
-
-
-    private getDialogWidth(){
-        return this.fullscreen? "100%":this.width
-    }
-
-
     /**
      * 关闭前的回调，会暂停 Dialog 的关闭
      * @param done 用于关闭 Dialog
      */
-    private beforeClose(done: any) {
+    @Prop({type: Function, required: false})
+    private readonly beforeClose!: () => {};
+
+    @Watch('fullscreen',{immediate:true,deep:true})
+    getDialogWidthWath(){
+        this.getDialogWidth()
     }
+
+    /**
+     * 设定弹出框的宽度
+     */
+    private getDialogWidth(){
+        return this.fullscreen? "100%":this.width
+    }
+
 
     /**
      * Dialog 关闭的按钮图标
@@ -127,6 +130,10 @@ export default class FsDialog extends Vue {
      * Dialog 打开的回调
      */
     private openClick() {
+        //添加键盘监听事件
+        if (this.closeOnPressEscape){
+            window.addEventListener('keydown', this.onKeydown)
+        }
         this.$emit('open')
     }
 
@@ -148,39 +155,46 @@ export default class FsDialog extends Vue {
      * Dialog 关闭动画结束时的回调
      */
     private closedClick() {
+        //移除键盘监听事件
+        window.removeEventListener('keydown', this.onKeydown)
         this.$emit('closed')
     }
 
     /**
-     *
+     *  Dialog是否显示
      */
     private handleClose() {
         this.$emit("update:visible", false)
     }
-    private rDialog(): VNode {
-        return (
-            <transition class='dialog-fade'>
-                {this.visible ? <div class='fs-dialog__wrapper' onclick={this.handleClose}>
-                    <div class='fs-dialog' style={`width:${this.getDialogWidth()};margin-top:${this.top};`}>
-                        <div class="fs-dialog__header">
-                            <span class="fs-dialog__title">{this.$slots.title?this.$slots.title:this.title}</span>
-                            {this.closeIcon ? (<button class='fs-dialog__headerbtn' onclick={this.handleClose}>
-                                <i class={this.closeIcon}></i>)}
-                            </button>) : null}
-                        </div>
-                        <div class="fs-dialog__body">{this.$slots.default}</div>
-                        <div class="fs-dialog__footer">{this.$slots.footer?(this.$slots.footer):(
-                           <span>
-                                <fs-button type='primary'>取消</fs-button>
-                                <fs-button type='primary'>确认</fs-button>
-                           </span>
-                        )}</div>
-                    </div>
-                </div> : null}
-            </transition>
-        );
+
+    /**
+     * 监听键盘，在按住esc时关闭dialog
+     */
+    private onKeydown(e:keyEvent) {
+        console.log(e)
+        if (e.keyCode ===27 || e.key ==='Escape'){
+            this.handleClose()
+        }
     }
 
 
+    private render() {
+        return (
+            <transition name='dialog-fade' onBeforeEnter={this.openClick} onEnter={this.openedClick} onBeforeLeave={this.closeClick} onLeave={this.closedClick}>
+                {this.visible?(<div class={'fs-dialog__wrapper'} onClick={this.handleClose}>
+                    <div class='fs-dialog' style={`width:${this.getDialogWidth};margin-top:${this.top};`} onClick={(e:Event)=>e.stopPropagation()}>
+                        <div class='fs-dialog__header'>
+                            <span class='fs-dialog__title'>{this.$slots.title?this.$slots.title:this.title}</span>
+                            {(this.closeIcon && this.showClose) ? (<button class='fs-dialog__headerbtn' onclick={this.handleClose}>
+                                <i class={this.closeIcon}></i>
+                            </button>) : null}
+                        </div>
+                        <div class='fs-dialog__body'>{this.$slots.default}</div>
+                        <div class='fs-dialog__footer'>{this.$slots.footer}</div>
+                    </div>
+                </div>):null}
+            </transition>
+        );
+    }
 }
 

@@ -8,7 +8,7 @@ import FsButton from '../../packages/src/button/button'
 import FsForm from '../../packages/src/form/form'
 import FsFormItem from '../../packages/src/form-item/form-item'
 import FsDialog from '../../packages/src/dialog/dialog'
-
+import '../../packages/assets/icon/iconfont'
 
 export default ({
   Vue

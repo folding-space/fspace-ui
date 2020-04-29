@@ -3,7 +3,7 @@
 @import '../../styles/common/var';
 
 
-.hm-dialog__wrapper {
+@include b(dialog__wrapper){
   position: fixed;
   top: 0;
   right: 0;
@@ -14,7 +14,7 @@
   z-index: 2001;
   background-color: rgba(0, 0, 0, .5);
 
-  .hm-dialog {
+  @include b(dialog){
     position: relative;
     margin: 15vh auto 50px;
     background: #fff;
@@ -28,13 +28,13 @@
       text-align: center;
       border-bottom: 1px solid #dcdfe6;
 
-      .hm-dialog__title {
+      @include b(dialog__title){
         line-height: 24px;
         font-size: 18px;
         color: #303133;
       }
 
-      .hm-dialog__headerbtn {
+      @include b(dialog__headerbtn){
         position: absolute;
         top: 20px;
         right: 20px;
@@ -66,7 +66,7 @@
       align-items: center;
       justify-content: center;
       text-space: 20px;
-      ::v-deep button{
+      button{
         margin:0 10px 0 10px!important;
       }
     }
