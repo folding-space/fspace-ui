@@ -1,25 +1,27 @@
 Arguments: 
-  /usr/local/Cellar/node/10.3.0/bin/node /usr/local/bin/yarn add vue-cli-plugin-vue-next -D --tilde
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
 
 PATH: 
-  /Users/qiliu/f-space/fspace-ui/node_modules/.bin:/Users/qiliu/f-space/node_modules/.bin:/Users/qiliu/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/Cellar/node/10.3.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/qiliu/flutter/flutter/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/qiliu/flutter/flutter/bin
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Roaming\npm;D:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Local\Yarn\bin
 
 Yarn version: 
-  1.17.3
+  1.22.4
 
 Node version: 
-  10.3.0
+  13.12.0
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, copyfile '/Users/qiliu/Library/Caches/Yarn/v4/npm-ansi-regex-4.1.0-8b9f8f08cf1acb843756a839ca8c7e3168c51997/node_modules/ansi-regex/index.js' -> '/Users/qiliu/f-space/fspace-ui/node_modules/@vuepress/core/node_modules/ansi-regex/index.js'
+  Error: EPERM: operation not permitted, unlink 'E:\公司项目\fspace-ui\node_modules\node-sass\vendor\win32-x64-79\binding.node'
 
 npm manifest: 
   {
     "name": "fspace-ui",
-    "version": "0.1.0",
+    "version": "1.0.2",
+    "author": "FoldingSpace-FE",
+    "license": "MIT",
     "private": false,
     "files": [
       "packages",
@@ -38,22 +40,24 @@ npm manifest:
       "styleguide:build": "vue-styleguidist build"
     },
     "dependencies": {
+      "@vue/babel-preset-jsx": "^1.0.0",
+      "async-validator": "^3.2.4",
       "babel-plugin-component": "^1.1.1",
+      "classnames": "^2.2.6",
       "core-js": "^3.6.4",
       "element-ui": "^2.13.0",
       "node-sass": "^4.13.1",
       "sass-loader": "^8.0.2",
-      "typescript": "^3.8.3",
-      "@vue/babel-preset-jsx": "^1.0.0",
+      "sockjs-client": "^1.4.0",
       "ts-loader": "^6.0.0",
+      "typescript": "^3.8.3",
+      "user": "0.0.0",
       "vue": "^2.6.11",
       "vue-class-component": "^7.2.3",
       "vue-property-decorator": "^8.4.1",
       "vue-router": "^3.1.6",
       "vuepress": "^1.4.1",
-      "vuepress-plugin-typescript": "^0.2.0",
       "vuex": "^3.1.3"
-      
     },
     "devDependencies": {
       "@typescript-eslint/eslint-plugin": "^2.27.0",
@@ -66,7 +70,7 @@ npm manifest:
       "typescript": "^3.8.3",
       "vue-template-compiler": "^2.6.11",
       "vuepress": "^1.4.1",
-      "vuepress-plugin-typescript": "^0.2.0"
+      "vuepress-types": "^0.9.1"
     },
     "browserslist": [
       "> 1%",
