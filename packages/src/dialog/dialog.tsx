@@ -1,4 +1,5 @@
 import {Component, Vue, Prop, Watch} from 'vue-property-decorator';
+import { PropTypes } from '../utils/vue-types'
 import './dialog.scss'
 
 
@@ -125,37 +126,37 @@ export default class FsDialog extends Vue {
     /**
      * Dialog 打开的回调
      */
-    private openClick() {
+    private openClick(e:any) {
         console.log(this.fullscreen)
         console.log(this.getDialogWidth())
         //添加键盘监听事件
         if (this.closeOnPressEscape) {
             window.addEventListener('keydown', this.onKeydown)
         }
-        this.$emit('open')
+        this.$emit('open',e)
     }
 
     /**
      * Dialog 打开动画结束时的回调
      */
-    private openedClick() {
-        this.$emit('opened')
+    private openedClick(e:any) {
+        this.$emit('opened',e)
     }
 
     /**
      * Dialog 关闭的回调
      */
-    private closeClick() {
-        this.$emit('close')
+    private closeClick(e:any) {
+        this.$emit('close',e)
     }
 
     /**
      * Dialog 关闭动画结束时的回调
      */
-    private closedClick() {
+    private closedClick(e:any) {
         //移除键盘监听事件
         window.removeEventListener('keydown', this.onKeydown)
-        this.$emit('closed')
+        this.$emit('closed',e)
     }
 
     /**
