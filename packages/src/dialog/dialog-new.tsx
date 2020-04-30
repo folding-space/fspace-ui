@@ -11,7 +11,7 @@ interface keyEvent {
 const dialogProps = Vue.extend({
     props: {
         /**
-         * 是否显示dialog，支持.sync 修饰符
+         * 是否显示dialog，支持.sync修饰符
          */
         visible: PropTypes.bool,
 

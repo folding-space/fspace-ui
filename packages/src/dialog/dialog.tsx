@@ -29,7 +29,7 @@ export default class FsDialog extends Vue {
     private width!: string;
 
     /**
-     * 是否为全屏 Dialog
+     * 是否为全屏Dialog
      */
     @Prop({type: Boolean, required: false, default: false})
     private readonly fullscreen!: false;
