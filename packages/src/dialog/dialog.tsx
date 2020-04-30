@@ -1,4 +1,4 @@
-import {Component, Vue, Prop,Watch} from 'vue-property-decorator';
+import {Component, Vue, Prop, Watch} from 'vue-property-decorator';
 import './dialog.scss'
 
 
@@ -106,16 +106,12 @@ export default class FsDialog extends Vue {
     @Prop({type: Function, required: false})
     private readonly beforeClose!: () => {};
 
-    @Watch('fullscreen',{immediate:true,deep:true})
-    getDialogWidthWath(){
-        this.getDialogWidth()
-    }
 
     /**
      * 设定弹出框的宽度
      */
-    private getDialogWidth(){
-        return this.fullscreen? "100%":this.width
+    private getDialogWidth() {
+        return this.fullscreen ? "100%" : this.width
     }
 
 
@@ -130,8 +126,10 @@ export default class FsDialog extends Vue {
      * Dialog 打开的回调
      */
     private openClick() {
+        console.log(this.fullscreen)
+        console.log(this.getDialogWidth())
         //添加键盘监听事件
-        if (this.closeOnPressEscape){
+        if (this.closeOnPressEscape) {
             window.addEventListener('keydown', this.onKeydown)
         }
         this.$emit('open')
@@ -170,9 +168,9 @@ export default class FsDialog extends Vue {
     /**
      * 监听键盘，在按住esc时关闭dialog
      */
-    private onKeydown(e:keyEvent) {
+    private onKeydown(e: keyEvent) {
         console.log(e)
-        if (e.keyCode ===27 || e.key ==='Escape'){
+        if (e.keyCode === 27 || e.key === 'Escape') {
             this.handleClose()
         }
     }
@@ -180,19 +178,22 @@ export default class FsDialog extends Vue {
 
     private render() {
         return (
-            <transition name='dialog-fade' onBeforeEnter={this.openClick} onEnter={this.openedClick} onBeforeLeave={this.closeClick} onLeave={this.closedClick}>
-                {this.visible?(<div class={'fs-dialog__wrapper'} onClick={this.handleClose}>
-                    <div class='fs-dialog' style={`width:${this.getDialogWidth};margin-top:${this.top};`} onClick={(e:Event)=>e.stopPropagation()}>
+            <transition name='dialog-fade' onBeforeEnter={this.openClick} onEnter={this.openedClick}
+                        onBeforeLeave={this.closeClick} onLeave={this.closedClick}>
+                {this.visible ? (<div class={'fs-dialog__wrapper'} onClick={this.handleClose}>
+                    <div class='fs-dialog' style={`width:${this.getDialogWidth()};margin-top:${this.top};`}
+                         onClick={(e: Event) => e.stopPropagation()}>
                         <div class='fs-dialog__header'>
-                            <span class='fs-dialog__title'>{this.$slots.title?this.$slots.title:this.title}</span>
-                            {(this.closeIcon && this.showClose) ? (<button class='fs-dialog__headerbtn' onclick={this.handleClose}>
-                                <i class={this.closeIcon}></i>
-                            </button>) : null}
+                            <span class='fs-dialog__title'>{this.$slots.title ? this.$slots.title : this.title}</span>
+                            {(this.closeIcon && this.showClose) ? (
+                                <button class='fs-dialog__headerbtn' onclick={this.handleClose}>
+                                    <i class={this.closeIcon}></i>
+                                </button>) : null}
                         </div>
                         <div class='fs-dialog__body'>{this.$slots.default}</div>
                         <div class='fs-dialog__footer'>{this.$slots.footer}</div>
                     </div>
-                </div>):null}
+                </div>) : null}
             </transition>
         );
     }

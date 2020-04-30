@@ -1,8 +1,10 @@
 import { Vue, Component, InjectReactive } from 'vue-property-decorator';
+// @ts-ignore
 import classNames from 'classnames';
 import './input.scss'
 import { VNode } from 'vue/types/umd';
 import { PropTypes } from '../utils/vue-types'
+// @ts-ignore
 import makeExpandingArea from './makeExpandingArea'
 import Mixins from '../mixins/index'
 
@@ -101,7 +103,7 @@ export default class FsInput extends inputProps {
   getClassName(type: string, child: string = ''): string {
     const prefix =  `fs-${type}${child}`
     return classNames(prefix, {
-      [`${prefix}-error`]: this.validateState 
+      [`${prefix}-error`]: this.validateState
     })
   }
 
@@ -141,7 +143,7 @@ export default class FsInput extends inputProps {
         >
         </input>
         {this.rSpan('input')}
-      
+
       </div>
     );
   }
@@ -178,4 +180,4 @@ export default class FsInput extends inputProps {
     return this.rInput()
 
   }
-} 
+}

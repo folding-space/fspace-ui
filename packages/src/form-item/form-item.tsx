@@ -4,6 +4,7 @@ import Mixins from '../mixins/index'
 import AsyncValidator from 'async-validator'
 import './form-item.scss'
 
+
 interface rule {
   message?: string,
   required?: boolean,
@@ -77,7 +78,7 @@ export default class FsFormItem extends formItemProps {
     const rules = this.getCurrentRule()
 
     if (rules.length === 0) return true
-    
+
     let desc = {
       [this.prop]: rules
     }
@@ -89,7 +90,7 @@ export default class FsFormItem extends formItemProps {
     validator.validate(model, { firstFields: true }, err => {
       this.validateState = err ? 'error' : 'success'
       this.validateMessage = err ? err[0].message : ''
-      
+
       // @ts-ignore
       cb(this.validateState, this.validateMessage)
     })
@@ -97,13 +98,13 @@ export default class FsFormItem extends formItemProps {
 
   onFiledChange() {
     this.validate('change', (state: string, msg: string) => {
-      this.formItemValidateState = state == 'error' 
+      this.formItemValidateState = state == 'error'
     })
   }
 
   onFiledBlur() {
     this.validate('blur', (state: string, msg: string) => {
-      this.formItemValidateState = state == 'error' 
+      this.formItemValidateState = state == 'error'
     })
   }
 
@@ -120,7 +121,7 @@ export default class FsFormItem extends formItemProps {
           {this.label !== '' ? <label class="fs-form-item__content-label">{this.label}</label> : null}
           {this.$slots.default}
         </div>
-        { this.validateState == 'error' ? <span class="fs-form-item__error">{ this.validateMessage }</span> : null } 
+        { this.validateState == 'error' ? <span class="fs-form-item__error">{ this.validateMessage }</span> : null }
       </div>
     )
   }

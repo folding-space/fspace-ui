@@ -10,10 +10,10 @@ lang="zh"
   <fs-button @click="openDasicDialog">点击打开Dialog</fs-button>
   <fs-dialog 
     :visible.sync="basicDialog"
+    :close-on-press-escape="false"
     top="30vh"
     title="设置默认标题"
     model="false"
-    :close-on-press-escape="false"
     width="30%">
     <span>这里添加dialog的核心内容</span>
     <template slot="footer">
@@ -27,9 +27,10 @@ lang="zh"
 <template>
   <fs-dialog 
     :visible.sync="basicDialog"
-    top="20vh"
-    model="false"
+    :close-on-press-escape="false"
+    top="30vh"
     title="设置默认标题"
+    model="false"
     width="30%">
     <span>这里添加dialog的核心内容</span>
     <template slot="footer">
@@ -121,6 +122,7 @@ lang="zh"
       close-icon="iconfont icon-icon-test44"
       show-close
       model="false"
+      fullscreen
       width="30%">
       <span>这里添加dialog的核心内容,右上角引用阿里矢量图标</span>
       <template slot="footer">
