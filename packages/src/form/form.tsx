@@ -3,6 +3,7 @@ import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
 import './form.scss'
 import { VNode } from 'vue/types/umd';
 
+
 @Component
 export default class FsForm extends Vue {
 

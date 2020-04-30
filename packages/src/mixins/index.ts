@@ -17,6 +17,10 @@ function broadcast(componentName, eventName, params) {
 @Component
 export default class Mixins extends Vue {
 
+    private getComponentSymbol() {
+       return Symbol(this.prop) 
+    }
+
     private dispatch(componentName, eventName, params) {
         let parent = this.$parent || this.$root;
         let name = parent.$options.name;
