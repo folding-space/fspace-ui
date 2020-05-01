@@ -14,7 +14,8 @@ const PropTypes = {
     },
     get bool() {
         return 'bool' as PropOptions<boolean>, {
-            type: Boolean
+            type: Boolean,
+            default: false
         }
     },
     get string() {
@@ -24,7 +25,8 @@ const PropTypes = {
     },
     get number() {
         return 'number' as PropOptions<number>, {
-            type: Number
+            type: Number,
+            default: -1
         }
     },
     get array() {

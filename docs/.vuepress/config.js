@@ -6,6 +6,7 @@ module.exports = {
     },
     module: {
       rules: [
+        
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
@@ -15,9 +16,7 @@ module.exports = {
               options: {
                 babelrc: false,
                 configFile: false,
-                presets: [
-                  '@vue/babel-preset-jsx'
-                ],
+                presets: ['vca-jsx', '@vue/app'],
               },
             },
             {

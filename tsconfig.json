@@ -3,17 +3,12 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
-    "strictNullChecks": false,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
     "baseUrl": ".",
     "lib": [
       "esnext",
@@ -24,7 +19,8 @@
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.vue",
   ],
   "exclude": [
     "node_modules"

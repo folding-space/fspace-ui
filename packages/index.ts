@@ -8,6 +8,7 @@ import FsRadioButton from './src/radio-button'
 import FsCheckbox from './src/checkbox'
 import FsCheckboxGroup from './src/checkbox-group'
 import FsDialog from './src/dialog'
+import FsHello from './src/hello/hello'
 
 const components = [
     FsInput,
@@ -19,7 +20,8 @@ const components = [
     FsRadioButton,
     FsCheckbox,
     FsCheckboxGroup,
-    FsDialog
+    FsDialog,
+    FsHello
 ]
 
 const install: any = function (Vue: any) {
@@ -42,5 +44,6 @@ export default {
     FsRadioButton,
     FsCheckbox,
     FsCheckboxGroup,
-    FsDialog
+    FsDialog,
+    FsHello
 };

@@ -1,6 +1,6 @@
 import { Component, Vue, Prop, Inject, ProvideReactive } from 'vue-property-decorator';
 import { PropTypes } from '../utils/vue-types'
-import Mixins from '../mixins/index'
+// import Mixins from '../hooks/emitter'
 import AsyncValidator from 'async-validator'
 import './form-item.scss'
 
@@ -14,7 +14,7 @@ interface rule {
 
 const formItemProps = Vue.extend({
   mixins: [
-    Mixins
+    // Mixins
   ],
   props: {
     prop: PropTypes.string,

@@ -1,10 +1,11 @@
 import FspaceUI from '../../packages/index'
+import VueCompositionApi from '@vue/composition-api';
 import { useTheme, addTheme, addCreateTheme } from '../../packages/src/theme/theme'
 
 export default ({
   Vue
 }) => {
-  //
+  Vue.use(VueCompositionApi);
   Vue.use(FspaceUI)
   // 自定义主题
   // addTheme('teal', {
