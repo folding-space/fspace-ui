@@ -5,6 +5,7 @@ import { PropTypes } from '../utils/vue-types'
 import makeExpandingArea from './makeExpandingArea'
 import './input.scss'
 
+
 const inputProps = {
   type: PropTypes.string,
   disabled: PropTypes.bool,

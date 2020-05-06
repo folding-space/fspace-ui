@@ -20,7 +20,8 @@ const PropTypes = {
     },
     get string() {
         return 'string' as PropOptions<string>, {
-            type: String
+            type: String,
+            default: ''
         }
     },
     get number() {

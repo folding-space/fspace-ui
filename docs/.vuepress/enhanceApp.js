@@ -27,9 +27,4 @@ export default ({
   // 切换主题
 
   useTheme('light')
-<<<<<<< HEAD
-
 }
-=======
-}
->>>>>>> 333e67ca6d6744e651ed2317edf629e46f1c87c8

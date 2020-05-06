@@ -1,69 +1,73 @@
-import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
-
+// import { Component, Vue, Prop, Provide } from 'vue-property-decorator';
+import { defineComponent, provide, onMounted, ref } from '@vue/composition-api';
+import { PropTypes } from '../utils/vue-types'
 import './form.scss'
-import { VNode } from 'vue/types/umd';
 
 
-@Component
-export default class FsForm extends Vue {
-
-    @Prop({ type: String, required: false, default: 'horizontal' })
-    private readonly layout!: string;
-
-    @Prop({ type: Object, required: false })
-    private readonly model!: object;
-
-    @Prop({ type: Object, required: false })
-    private readonly rules!: object;
-
-    @Provide() public form: object = {
-        model: this.model,
-        rules: this.rules
-    }
-
-    private fileds: any = []
-
-
-    private created() {
-        this.$on('on-form-item-add', (filed: any) => {
-            if (filed)
-                this.fileds.push(filed)
-        })
-
-        this.$on('on-form-item-destroy', (filed: any) => {
-            if (filed.prop)
-                this.fileds.splice(this.fileds.indexOf(filed), 1)
-        })
-    }
-
-    private resetFileds() {
-        this.fileds.forEach((filed: any) => {
-            filed.resetFiled()
-        })
-    }
-
-    private validate(cb: Function) {
-        let isValid = true
-        let counter: number = 0
-        this.fileds.forEach((filed: any) => {
-            filed.validate('', (err: any) => {
-                if (err) {
-                    isValid = false
-                }
-
-                counter++
-                if (counter === this.fileds.length) {
-                    cb(isValid)
-                }
-            })
-        })
-    }
-
-    private render(h: any): VNode {
-        const { $slots, $attrs } = this
-        return <div>
-            {$slots.default}
-        </div>
-    }
-
+const formProps = {
+  layout: PropTypes.string,
+  model: PropTypes.object,
+  rules: PropTypes.object,
 }
+
+const FormSymbol = Symbol('form')
+
+export default defineComponent({
+  name: 'FsForm',
+  props: {
+    ...formProps
+  },
+  setup(props, { slots, root }) {
+    let fileds = [ref(0)]
+
+    provide(FormSymbol, {
+      model: props.model,
+      rules: props.rules
+    })
+
+    onMounted(() => {
+      root.$on('on-form-item-add', (filed: any) => {
+        if (filed)
+          fileds.push(filed)
+      })
+
+      root.$on('on-form-item-destroy', (filed: any) => {
+        if (filed.prop)
+          fileds.splice(fileds.indexOf(filed), 1)
+      })
+    })
+
+    const resetFileds = () => {
+      fileds.forEach((filed: any) => {
+        filed.resetFiled()
+      })
+    }
+
+    const validate = (cb: Function) => {
+      let isValid = true
+      let counter: number = 0
+      fileds.forEach((filed: any) => {
+        filed.validate('', (err: any) => {
+          if (err) {
+            isValid = false
+          }
+
+          counter++
+          if (counter === fileds.length) {
+            cb(isValid)
+          }
+        })
+      })
+    }
+
+    return () => {
+      const renderItem = (slots: any) => {
+        return slots.default && slots.default(slots)
+      }
+      return <div>
+        {slots.default()}
+      </div>
+    }
+
+  }
+})
