@@ -1,5 +1,4 @@
 import {Component, Vue, Prop, Watch} from 'vue-property-decorator';
-import { PropTypes } from '../utils/vue-types'
 import './dialog.scss'
 
 

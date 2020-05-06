@@ -10,7 +10,7 @@ lang="zh"
   <fs-button @click="openDasicDialog">点击打开Dialog</fs-button>
   <fs-dialog 
     :visible.sync="basicDialog"
-    :close-on-press-escape="false"
+    :close-on-press-escape="true"
     top="30vh"
     title="设置默认标题"
     model="false"
@@ -27,7 +27,7 @@ lang="zh"
 <template>
   <fs-dialog 
     :visible.sync="basicDialog"
-    :close-on-press-escape="false"
+    :close-on-press-escape="true"
     top="30vh"
     title="设置默认标题"
     model="false"
@@ -177,8 +177,9 @@ lang="zh"
         iconDialog: false,
       };
     },
-    methods: {
+    methods: {      
       openDasicDialog(){
+        console.log('111')
       this.basicDialog = !this.basicDialog;
       },
       openCustomDialog(){
