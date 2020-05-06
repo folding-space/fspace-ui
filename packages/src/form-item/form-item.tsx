@@ -1,7 +1,9 @@
-import { Component, Vue, Prop, Inject } from 'vue-property-decorator';
-import Mixins from '../mixins/index'
+import { Component, Vue, Prop, Inject, ProvideReactive } from 'vue-property-decorator';
+import { PropTypes } from '../utils/vue-types'
+// import Mixins from '../hooks/emitter'
 import AsyncValidator from 'async-validator'
 import './form-item.scss'
+
 
 interface rule {
   message?: string,
@@ -9,21 +11,27 @@ interface rule {
   trigger?: string
 }
 
-@Component({
-  mixins: [Mixins]
-})
-export default class FsFormItem extends Vue {
 
-  @Inject()
-  form!: any;
+const formItemProps = Vue.extend({
+  mixins: [
+    // Mixins
+  ],
+  props: {
+    prop: PropTypes.string,
+    label: PropTypes.string
+  }
+});
+
+const key = Symbol()
+
+@Component
+export default class FsFormItem extends formItemProps {
+
+  @ProvideReactive('123123') private formItemValidateState = false
+
+  @Inject() form!: any;
 
   private dispatch!: Function
-
-  @Prop({ type: String, required: false, default: '' })
-  private readonly prop!: string;
-
-  @Prop({ type: String, required: false, default: '' })
-  private readonly label!: string;
 
   private isRequired: boolean = false
 
@@ -36,6 +44,7 @@ export default class FsFormItem extends Vue {
   }
 
   private mounted() {
+    console.log(this)
     if (this.prop) {
       this.dispatch('FsForm', 'on-form-item-add', this)
 
@@ -69,7 +78,7 @@ export default class FsFormItem extends Vue {
     const rules = this.getCurrentRule()
 
     if (rules.length === 0) return true
-    
+
     let desc = {
       [this.prop]: rules
     }
@@ -81,20 +90,21 @@ export default class FsFormItem extends Vue {
     validator.validate(model, { firstFields: true }, err => {
       this.validateState = err ? 'error' : 'success'
       this.validateMessage = err ? err[0].message : ''
+
       // @ts-ignore
-      // cb(this.validateState, this.validateMessage)
+      cb(this.validateState, this.validateMessage)
     })
   }
 
   onFiledChange() {
     this.validate('change', (state: string, msg: string) => {
-      console.log(state)
+      this.formItemValidateState = state == 'error'
     })
   }
 
   onFiledBlur() {
-    this.validate('blur', () => {
-
+    this.validate('blur', (state: string, msg: string) => {
+      this.formItemValidateState = state == 'error'
     })
   }
 
@@ -111,7 +121,7 @@ export default class FsFormItem extends Vue {
           {this.label !== '' ? <label class="fs-form-item__content-label">{this.label}</label> : null}
           {this.$slots.default}
         </div>
-        { this.validateState == 'error' ? <span class="fs-form-item__error">{ this.validateMessage }</span> : null } 
+        { this.validateState == 'error' ? <span class="fs-form-item__error">{ this.validateMessage }</span> : null }
       </div>
     )
   }

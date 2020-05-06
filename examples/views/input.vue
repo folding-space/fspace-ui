@@ -1,15 +1,7 @@
 <template>
   <div>
-    <fs-form
-      :model="form"
-      :rules="rules">
-      <fs-form-item prop="userName">
-        <fs-input v-model="form.userName" :clearable="true" />
-      </fs-form-item>
-       <fs-form-item prop="password">
-        <fs-input type="password" v-model="form.password" :clearable="true" :show-password="true" />
-      </fs-form-item>
-    </fs-form>
+  
+  <fs-hello />
   </div>
 </template>
 <script>
@@ -17,6 +9,7 @@
   //   message?: string
   //   trigger?: string
   //   validator?: Function
+// import FsHello from '../../packages/src/hello/hello'
 export default {
   name: "home",
   data() {

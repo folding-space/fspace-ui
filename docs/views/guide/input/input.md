@@ -7,11 +7,13 @@ lang="zh"
 ## 基础用法
 &nbsp;
 <div>
-</div>
 <fs-input v-model="msg" />
+</div>
+
 
 <script>
 export default {
+
   data() {
     return {
       msg: 'Hello World!'

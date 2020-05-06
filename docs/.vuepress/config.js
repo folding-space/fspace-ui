@@ -6,6 +6,7 @@ module.exports = {
     },
     module: {
       rules: [
+        
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
@@ -15,9 +16,7 @@ module.exports = {
               options: {
                 babelrc: false,
                 configFile: false,
-                presets: [
-                  '@vue/babel-preset-jsx'
-                ],
+                presets: ['vca-jsx', '@vue/app'],
               },
             },
             {
@@ -54,6 +53,7 @@ module.exports = {
           ['/views/guide/checkbox/checkbox.md', 'Checkbox'],
           ['/views/guide/form/form.md', 'Form'],
           ['/views/guide/layout/layout.md', 'Layout']
+          ['/views/guide/dialog/dialog.md', 'Dialog'],
         ]
       }
     ]

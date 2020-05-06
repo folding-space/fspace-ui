@@ -4,32 +4,34 @@ import { PropOptions } from "vue"
 const PropTypes = {
     get any() {
         return 'any' as PropOptions<any>, {
-            type: '',
+            type: () => {},
         }
     },
     get func() {
         return 'func' as PropOptions<Function>, {
-            type: Function,
+            type: Function
         }
     },
     get bool() {
         return 'bool' as PropOptions<boolean>, {
             type: Boolean,
+            default: false
         }
     },
     get string() {
         return 'string' as PropOptions<string>, {
-            type: String,
+            type: String
         }
     },
     get number() {
         return 'number' as PropOptions<number>, {
             type: Number,
+            default: -1
         }
     },
     get array() {
         return 'array' as PropOptions<any[]>, {
-            type: Array,
+            type: Array
         }
     },
     get object() {

@@ -1,9 +1,8 @@
+
 import { defineComponent, computed, onMounted, PropType, Ref, ref } from '@vue/composition-api';
 import classNames from 'classnames';
 import { VNode } from 'vue/types/umd';
 import { PropTypes } from '../utils/vue-types'
-import makeExpandingArea from './makeExpandingArea'
-import './input.scss'
 
 const inputProps = {
   type: PropTypes.string,
@@ -20,14 +19,11 @@ const inputProps = {
 }
 
 export default defineComponent({
-  name: 'FsInput',
+  name: 'FsHello',
   props: {
     ...inputProps
   },
   setup(props, { emit, attrs }) {
-
-    const textarea = ref(null);
-
     let innerValue: Ref<string> = ref('')
 
     let focused: Ref<boolean> = ref(false)
@@ -35,6 +31,8 @@ export default defineComponent({
     let showClear: Ref<boolean | undefined> = ref(false)
 
     let showPsd: Ref<boolean> = ref(false)
+
+    let dispatch: Ref<Function> = ref(() => { })
 
     const inputShowPassword = computed((): boolean => {
       return (props.type == 'password' && props.showPassword) || false
@@ -51,11 +49,11 @@ export default defineComponent({
     onMounted(() => {
       innerValue.value = attrs.value;
       if (props.autosize) {
-        makeExpandingArea(textarea.value)
+        // makeExpandingArea($refs.textarea)
       }
     })
 
-    const onInput = (e: InputEvent) => {
+    const onInput = (e: Event) => {
       const { value = '' }: any = e.target || {};
       innerValue.value = value;
       setShowClear();
@@ -109,8 +107,8 @@ export default defineComponent({
     const rSpan = (type: string): VNode | null => {
       return (
         <div>
-          {showClear.value ? <span class={getClassIcon('44')} onmousedown={onClear} /> : null}
-          {inputShowPassword.value ? <span class={getClassIcon(showPsd.value ? '1' : '')} onmousedown={onShowPassword} /> : null}
+          {showClear.value ? <span class={getClassIcon('icon')} onmousedown={onClear} /> : null}
+          {inputShowPassword ? <span class={getClassIcon(showPsd.value ? '1' : '')} onmousedown={onShowPassword} /> : null}
           {type == 'textarea' && props.maxlength > 0 ? <span class="fs-textarea__count"> {innerValue.value.length} / {props.maxlength} </span> : null}
         </div>
       )

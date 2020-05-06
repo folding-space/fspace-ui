@@ -19,7 +19,7 @@
 
         // $border-color: darken($startcolor); 
 
-        &:focus{
+        &:focus {
             border: 1px solid $--color-info;
             border-radius: 1px solid $--color-info;
         }
@@ -32,7 +32,14 @@
             -ms-transform: translate(-50%,-50%);
             transform: translate(0,-50%);
         }
+
+        &-error {
+            border:  1px solid $--color-danger;
+            border-color: 1px solid $--color-danger;
+        }
     }
+
+   
 }
 
 
