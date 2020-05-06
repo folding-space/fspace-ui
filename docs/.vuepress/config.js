@@ -52,6 +52,7 @@ module.exports = {
           ['/views/guide/radio/radio.md', 'Radio'],
           ['/views/guide/checkbox/checkbox.md', 'Checkbox'],
           ['/views/guide/form/form.md', 'Form'],
+          ['/views/guide/layout/layout.md', 'Layout']
           ['/views/guide/dialog/dialog.md', 'Dialog'],
         ]
       }

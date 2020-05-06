@@ -15,6 +15,7 @@ export default ({
   //   success: '#4caf50',
   //   warning: '#ffeb3b',
   // }, 'light');
+
   // 主题样式扩展
   // addCreateTheme((theme) => {
   //   return `
@@ -24,5 +25,11 @@ export default ({
   //   `
   // })
   // 切换主题
+
   useTheme('light')
+<<<<<<< HEAD
+
 }
+=======
+}
+>>>>>>> 333e67ca6d6744e651ed2317edf629e46f1c87c8

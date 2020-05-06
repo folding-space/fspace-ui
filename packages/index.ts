@@ -7,6 +7,8 @@ import FsRadioGroup from './src/radio-group'
 import FsRadioButton from './src/radio-button'
 import FsCheckbox from './src/checkbox'
 import FsCheckboxGroup from './src/checkbox-group'
+import FsRow from './src/layout/row/row'
+import FsCol from './src/layout/col/col'
 import FsDialog from './src/dialog'
 import FsHello from './src/hello/hello'
 
@@ -20,6 +22,8 @@ const components = [
     FsRadioButton,
     FsCheckbox,
     FsCheckboxGroup,
+    FsRow,
+    FsCol,
     FsDialog,
     FsHello
 ]
@@ -44,6 +48,8 @@ export default {
     FsRadioButton,
     FsCheckbox,
     FsCheckboxGroup,
+    FsRow,
+    FsCol,
     FsDialog,
     FsHello
 };

@@ -5,9 +5,11 @@ FSPACE-UI 支持使用 javascript 定制和切换主题，默认提供 light 和
 ## 切换主题
 
 ```vue
+<script>
 import { useTheme } from '../../packages/src/theme/theme'
 
 useTheme('light')
+</script>
 ```
 
 ## 自定义主题
@@ -22,6 +24,7 @@ extendName 继承哪个主题， 默认 ‘light’
 
 
 ```vue
+<script>
 import { addTheme } from '../../packages/src/theme/theme'
 
 addTheme('teal', {
@@ -32,11 +35,13 @@ addTheme('teal', {
 }, 'light');
 
 useTheme('light')
+</script>
 ```
 
 ## 主题样式扩展
 
 ```vue
+<script>
 import { addCreateTheme } from '../../packages/src/theme/theme'
 
 addCreateTheme((theme) => {
@@ -47,4 +52,5 @@ addCreateTheme((theme) => {
 }
 
 useTheme('light')
+</script>
 ```

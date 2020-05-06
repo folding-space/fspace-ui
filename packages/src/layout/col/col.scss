@@ -1,0 +1,6 @@
+@charset "utf-8";
+@import '../../../styles/mixins/mixins';
+
+@include b(col) {
+  // background-color: #ccc;
+}
