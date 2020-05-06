@@ -9,6 +9,8 @@ import FsForm from '../../packages/src/form/form'
 import FsFormItem from '../../packages/src/form-item/form-item'
 import FsCheckbox from '../../packages/src/checkbox'
 import FsCheckboxGroup from '../../packages/src/checkbox/checkbox-group'
+import FsRow from '../../packages/src/layout/row/row'
+import FsCol from '../../packages/src/layout/col/col'
 
 import FspaceUI from '../../packages/index'
 import { useTheme, addTheme, addCreateTheme } from '../../packages/src/theme/theme'
@@ -16,7 +18,7 @@ import { useTheme, addTheme, addCreateTheme } from '../../packages/src/theme/the
 export default ({
   Vue
 }) => {
-  // 
+  
   Vue.use(FspaceUI)
   // 自定义主题
   // addTheme('teal', {
@@ -26,6 +28,7 @@ export default ({
   //   success: '#4caf50',
   //   warning: '#ffeb3b',
   // }, 'light');
+
   // 主题样式扩展
   // addCreateTheme((theme) => {
   //   return `
@@ -35,12 +38,7 @@ export default ({
   //   `
   // })
   // 切换主题
+
   useTheme('light')
-  // Vue.component(FsInput.name, FsInput)
-  // Vue.component(FsRadio.name, FsRadio)
-  // Vue.component(FsRadioGroup.name, FsRadioGroup)
-  // Vue.component(FsRadioButton.name, FsRadioButton)
-  // Vue.component(FsButton.name, FsButton)
-  // Vue.component(FsForm.name, FsForm)
-  // Vue.component(FsFormItem.name, FsFormItem)
+
 }
