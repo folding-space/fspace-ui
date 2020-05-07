@@ -12,66 +12,66 @@
   overflow: auto;
   margin: 0;
   z-index: 2001;
+  
   background-color: rgba(0, 0, 0, .5);
+}
+@include b(dialog__radius){
+  border-radius: 5px;
+}
+@include b(dialog){
+  position: relative;
+  margin: 15vh auto 0;
+  background: #fff; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+  box-sizing: border-box;
 
-  @include b(dialog){
-    position: relative;
-    margin: 15vh auto 50px;
-    background: #fff;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
-    box-sizing: border-box;
+  &__header {
+    padding: 20px 20px 10px;
+    text-align: center;
+    border-bottom: 1px solid #dcdfe6;
 
-    &__header {
-      padding: 20px 20px 10px;
-      text-align: center;
-      border-bottom: 1px solid #dcdfe6;
-
-      @include b(dialog__title){
-        line-height: 24px;
-        font-size: 18px;
-        color: #303133;
-      }
-
-      @include b(dialog__headerbtn){
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 0;
-        background: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        font-size: 16px;
-
-        .el-icon-close {
-          color: #909399;
-        }
-      }
+    @include b(dialog__title){
+      line-height: 24px;
+      font-size: 18px;
+      color: #303133;
     }
 
-    &__body {
-      padding: 30px 20px;
-      color: #606266;
-      font-size: 14px;
-      word-break: break-all;
-    }
+    @include b(dialog__headerbtn){
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 16px;
 
-    &__footer {
-      padding: 10px 20px 20px;
-      text-align: right;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-space: 20px;
-      button{
-        margin:0 10px 0 10px!important;
+      .el-icon-close {
+        color: #909399;
       }
     }
   }
-}
 
+  &__body {
+    padding: 30px 20px;
+    color: #606266;
+    font-size: 14px;
+    word-break: break-all;
+  }
+
+  &__footer {
+    padding: 10px 20px 20px;
+    text-align: right;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+      margin:0 10px 0 10px!important;
+    }
+  }
+}
 .dialog-fade-enter-active {
   animation: dialog-fade-in .4s;
 }
