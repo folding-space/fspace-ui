@@ -52,8 +52,6 @@ const PropTypes = {
     }
 }
 
-
-
 export {
     PropTypes
 }  

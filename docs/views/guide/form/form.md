@@ -6,7 +6,7 @@ lang="zh"
 
 ## 基础用法
 &nbsp;
-<fs-form ref="form" :model="model" :rules="rules">
+<fs-form ref="form" @submit="submit" :model="model" :rules="rules">
     <fs-form-item label="用户名:" prop="userName" > 
         <fs-input v-model="model.userName" placeholder="请输入用户名" />
     </fs-form-item>
@@ -48,12 +48,13 @@ export default {
 
   methods: {
     reset() {
-      this.$refs.form.resetFileds()
+      console.log(this.$refs.form.$emit('click-child'))
+      this.$refs.form.$emit('click-child');
+      // this.$refs.form.resetFileds()
     },
     submit() {
       this.$refs.form.validate((v) => {
         if(v) {
-          console.log(this.model)
 
         }else {
           

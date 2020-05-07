@@ -2,6 +2,7 @@
 import { defineComponent, provide, onMounted, ref } from '@vue/composition-api';
 import { PropTypes } from '../utils/vue-types'
 import './form.scss'
+import { transparent } from '../theme/colors';
 
 
 const formProps = {
@@ -10,7 +11,7 @@ const formProps = {
   rules: PropTypes.object,
 }
 
-const FormSymbol = Symbol('form')
+export const FormSymbol = Symbol('form')
 
 export default defineComponent({
   name: 'FsForm',
@@ -43,7 +44,7 @@ export default defineComponent({
       })
     }
 
-    const validate = (cb: Function) => {
+    function validate(cb: Function) {
       let isValid = true
       let counter: number = 0
       fileds.forEach((filed: any) => {

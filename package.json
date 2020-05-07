@@ -49,6 +49,8 @@
     "@vue/cli-service": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-alloy": "^3.6.0",
+    "husky": "^4.2.5",
+    "pre-commit": "^1.2.2",
     "typescript": "^3.8.3",
     "vue-template-compiler": "^2.6.11",
     "vuepress": "^1.4.1",
@@ -58,5 +60,11 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }

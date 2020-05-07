@@ -1,6 +1,7 @@
 import { defineComponent, provide, inject, computed, onMounted, ref, Ref } from '@vue/composition-api';
 import AsyncValidator from 'async-validator'
 import { PropTypes } from '../utils/vue-types'
+import { FormSymbol } from '../form/form'
 import './form-item.scss'
 
 interface rule {
@@ -19,7 +20,7 @@ const formItemProps = {
   label: PropTypes.string
 }
 
-const FormSymbol = Symbol('form')
+// const FormSymbol = Symbol('form')
 
 const FormItemSymbol = Symbol('formItem')
 
@@ -36,7 +37,7 @@ export default defineComponent({
 
     provide(FormItemSymbol, formItemValidateState)
 
-    let form: form = inject(FormSymbol) || {
+    const form: form = inject(FormSymbol) || {
       model: {},
       rules: {}
     };

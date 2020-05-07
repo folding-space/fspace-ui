@@ -1,4 +1,4 @@
-import { defineComponent, computed, onMounted, PropType, Ref, ref } from '@vue/composition-api';
+import { defineComponent, computed, onMounted, PropType, Ref, ref, toRefs, toRef} from '@vue/composition-api';
 import classNames from 'classnames';
 import { VNode } from 'vue/types/umd';
 import { PropTypes } from '../utils/vue-types'
@@ -95,7 +95,7 @@ export default defineComponent({
     const getClassName = (type: string, child: string = ''): string => {
       const prefix = `fs-${type}${child}`
       return classNames(prefix, {
-        [`${prefix}-error`]: false
+        [`${prefix}-error`]: this
       })
     }
 
