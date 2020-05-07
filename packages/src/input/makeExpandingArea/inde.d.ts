@@ -1,1 +1,0 @@
-export default function(el: Vue | Element | Vue[] | Element[]): void
