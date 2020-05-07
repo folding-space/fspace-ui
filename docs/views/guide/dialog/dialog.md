@@ -10,10 +10,11 @@ lang="zh"
   <fs-button @click="openDasicDialog">点击打开Dialog</fs-button>
   <fs-dialog 
     :visible.sync="basicDialog"
-    :close-on-press-escape="false"
+    close-on-press-escape
     top="30vh"
     title="设置默认标题"
-    model="false"
+    border-radius
+    modal
     width="30%">
     <span>这里添加dialog的核心内容</span>
     <template slot="footer">
@@ -27,10 +28,11 @@ lang="zh"
 <template>
   <fs-dialog 
     :visible.sync="basicDialog"
-    :close-on-press-escape="false"
+    border-radius
+    close-on-press-escape
     top="30vh"
     title="设置默认标题"
-    model="false"
+    modal
     width="30%">
     <span>这里添加dialog的核心内容</span>
     <template slot="footer">
@@ -63,8 +65,8 @@ lang="zh"
   <fs-dialog 
     :visible.sync="customDialog"
     top="20vh"
-    model="false"
     title="设置默认标题"
+    modal
     width="30%">
     <template slot="title">
       <span>自定义title内容和样式</span>
@@ -76,13 +78,14 @@ lang="zh"
   </fs-dialog>
 </div>
 
+
 ```vue
 <template> 
   <fs-dialog 
     :visible.sync="customDialog"
     top="50vh"
-    model="false"
     title="设置默认标题"
+    modal
     width="30%">
     <template slot="title">
       <span>自定义title内容和样式</span>
@@ -117,11 +120,10 @@ lang="zh"
   <fs-button @click="openIconDialog">点击打开Dialog</fs-button>
     <fs-dialog 
       :visible.sync="iconDialog"
-      top="30vh"
       title="引用自定义的关闭按钮"
       close-icon="iconfont icon-icon-test44"
       show-close
-      model="false"
+      modal
       fullscreen
       width="30%">
       <span>这里添加dialog的核心内容,右上角引用阿里矢量图标</span>
@@ -143,8 +145,7 @@ lang="zh"
     title="引用自定义的关闭按钮"
     close-icon="iconfont icon-icon-test44"
     show-close
-    model="false"
-    width="30%">
+    width="100%">
     <span>这里添加dialog的核心内容,右上角引用阿里矢量图标</span>
     <template slot="footer">
       <fs-button @click="openIconDialog">取消</fs-button>
@@ -168,6 +169,38 @@ lang="zh"
   }
 </script>
 ```
+
+## 插入至body元素
+<div style="margin-top: 15px;">
+  <fs-dialog 
+    border-radius
+    :append-to-body="true"
+    title="插入至 body 元素">
+    <span>这里添加dialog的核心内容</span>
+    <template slot="footer">
+      <fs-button >取消</fs-button>
+      <fs-button type="primary">确认</fs-button>
+    </template>
+  </fs-dialog>
+</div>
+
+```vue
+<template>
+  <div style="margin-top: 15px;">
+    <fs-dialog 
+      border-radius
+      :append-to-body="true"
+      title="插入至 body 元素">
+      <span>这里添加dialog的核心内容</span>
+      <template slot="footer">
+        <fs-button >取消</fs-button>
+        <fs-button type="primary">确认</fs-button>
+      </template>
+    </fs-dialog>
+  </div>
+</template>
+```
+
 <script>
   export default {
     data() {
@@ -177,8 +210,9 @@ lang="zh"
         iconDialog: false,
       };
     },
-    methods: {
+    methods: {      
       openDasicDialog(){
+        console.log('111')
       this.basicDialog = !this.basicDialog;
       },
       openCustomDialog(){
