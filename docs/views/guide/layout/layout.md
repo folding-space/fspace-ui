@@ -72,20 +72,25 @@ lang="zh"
   <fs-row justify-content="start">
     <fs-col></fs-col>
     <fs-col></fs-col>
+    <fs-col></fs-col>
   </fs-row>
   <fs-row justify-content="end">
+    <fs-col></fs-col>
     <fs-col></fs-col>
     <fs-col></fs-col>
   </fs-row>
   <fs-row justify-content="center">
     <fs-col></fs-col>
     <fs-col></fs-col>
+    <fs-col></fs-col>
   </fs-row>
   <fs-row justify-content="around">
     <fs-col></fs-col>
     <fs-col></fs-col>
+    <fs-col></fs-col>
   </fs-row>
   <fs-row justify-content="between">
+    <fs-col></fs-col>
     <fs-col></fs-col>
     <fs-col></fs-col>
   </fs-row>
@@ -115,12 +120,15 @@ lang="zh"
   <fs-row align-items="center">
     <fs-col></fs-col>
     <fs-col></fs-col>
+    <fs-col></fs-col>
   </fs-row>
   <fs-row align-items="start">
     <fs-col></fs-col>
     <fs-col></fs-col>
+    <fs-col></fs-col>
   </fs-row>
   <fs-row align-items="end">
+    <fs-col></fs-col>
     <fs-col></fs-col>
     <fs-col></fs-col>
   </fs-row>
@@ -151,15 +159,21 @@ lang="zh"
 
 ```vue
   <fs-row wrap="wrap">
-    <fs-col></fs-col>
-    <fs-col></fs-col>
+    <fs-col>1</fs-col>
+    <fs-col>2</fs-col>
+    <fs-col>3</fs-col>
+    <fs-col>4</fs-col>
   </fs-row>
   <fs-row wrap="nowrap">
-    <fs-col></fs-col>
-    <fs-col></fs-col>
+    <fs-col>1</fs-col>
+    <fs-col>2</fs-col>
+    <fs-col>3</fs-col>
+    <fs-col>4</fs-col>
   </fs-row>
   <fs-row wrap="reverse">
-    <fs-col></fs-col>
-    <fs-col></fs-col>
+    <fs-col>1</fs-col>
+    <fs-col>2</fs-col>
+    <fs-col>3</fs-col>
+    <fs-col>4</fs-col>
   </fs-row>
 ```

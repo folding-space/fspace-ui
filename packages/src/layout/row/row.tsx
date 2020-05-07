@@ -27,10 +27,6 @@ export default defineComponent ({
   },
   setup(props, { emit, attrs, slots }) {
 
-    onMounted(() => {
-      console.log(attrs,slots)
-    })
-
     const fsRow = (): VNode => {
       return <div class={"fs-row"+' jc'+props.justifyContent+' ai'+props.alignItems+' '+props.wrap}>
           {slots.default()}
