@@ -22,8 +22,9 @@ const components = [
     FsCheckbox,
     FsCheckboxGroup,
     FsRow,
+    FsDialog,
     FsCol,
-    FsDialog
+    
 ]
 
 const install: any = function (Vue: any) {
@@ -48,5 +49,5 @@ export default {
     FsCheckboxGroup,
     FsRow,
     FsCol,
-    FsDialog
+    FsDialog,
 };
