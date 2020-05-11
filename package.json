@@ -52,7 +52,7 @@
     "husky": "^4.2.5",
     "pre-commit": "^1.2.2",
     "typescript": "^3.8.3",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.11", 
     "vuepress": "^1.4.1",
     "vuepress-types": "^0.9.1"
   },
