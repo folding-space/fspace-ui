@@ -22,11 +22,8 @@
   },
   "dependencies": {
     "@vue/babel-preset-jsx": "^1.0.0",
-<<<<<<< HEAD
-=======
     "@vue/composition-api": "^0.5.0",
     "async-validator": "^3.2.4",
->>>>>>> a3dc01d81f51acf87c1851c7908811761cf45ab5
     "babel-plugin-component": "^1.1.1",
     "babel-preset-vca-jsx": "^0.3.5",
     "classnames": "^2.2.6",
@@ -37,21 +34,12 @@
     "sockjs-client": "^1.4.0",
     "ts-loader": "^6.0.0",
     "typescript": "^3.8.3",
-<<<<<<< HEAD
-=======
     "user": "0.0.0",
->>>>>>> a3dc01d81f51acf87c1851c7908811761cf45ab5
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.1",
     "vue-router": "^3.1.6",
-<<<<<<< HEAD
-    "vuepress": "^1.4.1",
-    "vuepress-plugin-typescript": "^0.2.0",
-    "vuex": "^3.1.3"
-=======
     "vuepress": "^1.4.1"
->>>>>>> a3dc01d81f51acf87c1851c7908811761cf45ab5
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.27.0",

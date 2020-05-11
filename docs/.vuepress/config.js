@@ -6,6 +6,7 @@ module.exports = {
     },
     module: {
       rules: [
+        
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
@@ -15,9 +16,7 @@ module.exports = {
               options: {
                 babelrc: false,
                 configFile: false,
-                presets: [
-                  '@vue/babel-preset-jsx'
-                ],
+                presets: ['vca-jsx', '@vue/app'],
               },
             },
             {
@@ -42,27 +41,21 @@ module.exports = {
         title: '简介',
         collapsable: false,
         children: [
-          '/', '/views/introduction/',
+          '/', '/views/introduction/', '/views/theme/'
         ]
       },
       {
         title: '组件',
         children: [
-          ['/views/guide/input/input.md', 'input'],
-          ['/views/guide/button/button.md', 'button'],
-          ['/views/guide/tag/tag.md', 'tag'],
+          ['/views/guide/input/input.md', 'Input'],
+          ['/views/guide/button/button.md', 'Button'],
+          ['/views/guide/radio/radio.md', 'Radio'],
+          ['/views/guide/checkbox/checkbox.md', 'Checkbox'],
+          ['/views/guide/form/form.md', 'Form'],
+          ['/views/guide/layout/layout.md', 'Layout'],
+          ['/views/guide/dialog/dialog.md', 'Dialog']
         ]
       }
     ]
-  },
-  plugins: [
-    [
-      'vuepress-plugin-typescript',
-      {
-        tsLoaderOptions: {
-          // ts-loader 的所有配置项
-        },
-      },
-    ],
-  ],
+  }
 }
