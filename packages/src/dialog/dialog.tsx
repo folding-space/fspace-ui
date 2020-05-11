@@ -1,8 +1,8 @@
-import { defineComponent} from '@vue/composition-api';
-//import { PropTypes } from '../utils/vue-types';
+import { defineComponent } from '@vue/composition-api';
 import { VNode } from 'vue/types/umd';
+//@ts-ignore
 import classNames from 'classnames';
-import {dialogProps} from './dialogPropTypes'
+import { dialogProps } from './dialogPropTypes'
 import './dialog.scss'
 
 
@@ -10,30 +10,19 @@ interface keyEvent {
     keyCode: number
     key: string
 }
-const initDefaultProps = (propTypes:any, defaultProps:any) => {
-    Object.keys(defaultProps).forEach(k => {
-      if (propTypes[k]) {
-        propTypes[k].def && (propTypes[k] = propTypes[k].def(defaultProps[k]));
-      } else {
-        throw new Error(`not have ${k} prop`);
-      }
-    });
-    return propTypes;
-  };
-
 
 export default defineComponent({
     name: 'FsDialog',
     // props: {
     //     ...dialogProps
     // },
-    props:initDefaultProps(dialogProps,{
-        modal:true
-    }),
+    props: {
+        ...dialogProps
+    },
     setup(props, context) {
         const emit = context.emit
         const slots = context.slots
-           
+
         /**
          * Dialog 打开的回调
          */
@@ -93,45 +82,45 @@ export default defineComponent({
         /**
          * 
          */
-        const getClassName = (cName:string ,isClass: boolean) => {
+        const getClassName = (cName: string, isClass: boolean) => {
             return classNames({
-                [`fs-dialog__${cName}`]:isClass
-            })  
+                [`fs-dialog__${cName}`]: isClass
+            })
         }
 
-        const dialogArea = ():VNode=>{
-            return <div class={`fs-dialog ${getClassName('radius',props.borderRadius)}`}
-                      style={`width:${getDialogWidth()};margin-top:${props.appendToBody?"1px":props.top};`}
-                      onClick={(e: Event) => e.stopPropagation()}>
-                      <div class='fs-dialog__header'>
-                        <span class='fs-dialog__title'>{slots.title ? slots.title() : props.title}</span>
-                        {(props.closeIcon && props.showClose) ? (
-                          <button class='fs-dialog__headerbtn' onclick={handleClose}>
+        const dialogArea = (): VNode => {
+            return <div class={`fs-dialog ${getClassName('radius', props.borderRadius)}`}
+                style={`width:${getDialogWidth()};margin-top:${props.appendToBody ? "1px" : props.top};`}
+                onClick={(e: Event) => e.stopPropagation()}>
+                <div class='fs-dialog__header'>
+                    <span class='fs-dialog__title'>{slots.title ? slots.title() : props.title}</span>
+                    {(props.closeIcon && props.showClose) ? (
+                        <button class='fs-dialog__headerbtn' onclick={handleClose}>
                             <i class={props.closeIcon}></i>
-                          </button>) : null}
-                      </div>
-                      <div class='fs-dialog__body'>{slots.default()}</div>
-                   <  div class='fs-dialog__footer'>{slots.footer()}</div>
-                   </div>
+                        </button>) : null}
+                </div>
+                <div class='fs-dialog__body'>{slots.default()}</div>
+                <  div class='fs-dialog__footer'>{slots.footer()}</div>
+            </div>
 
         }
-     
+
         return () => {
-            if(props.appendToBody){
+            if (props.appendToBody) {
                 return dialogArea()
-            }else{
+            } else {
                 return <transition
-                         name='dialog-fade'
-                         onBeforeEnter={openClick}
-                         onEnter={openedClick}
-                         onBeforeLeave={closeClick}
-                         onLeave={closedClick}>
-                         {props.visible ? <div
-                             class={getClassName('wrapper',props.modal)}
-                             onClick={handleClose}>
-                             {dialogArea()}
-                         </div> : null}
-                       </transition>
+                    name='dialog-fade'
+                    onBeforeEnter={openClick}
+                    onEnter={openedClick}
+                    onBeforeLeave={closeClick}
+                    onLeave={closedClick}>
+                    {props.visible ? <div
+                        class={getClassName('wrapper', props.modal)}
+                        onClick={handleClose}>
+                        {dialogArea()}
+                    </div> : null}
+                </transition>
             }
         }
     }
