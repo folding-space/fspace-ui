@@ -1,219 +1,175 @@
-import { Component, Vue, Prop,  } from 'vue-property-decorator';
-import Mixins from '../mixins/index'
-
-import './input.scss'
+import { defineComponent, computed, onMounted, PropType, Ref, ref, toRefs, toRef} from '@vue/composition-api';
+import classNames from 'classnames';
 import { VNode } from 'vue/types/umd';
+import { PropTypes } from '../utils/vue-types'
+import makeExpandingArea from './makeExpandingArea'
+import './input.scss'
 
-let win: any = window
 
-@Component({
-  // mixins: [Mixins]
-})
-export default class FsInput extends Vue {
+const inputProps = {
+  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  readonly: PropTypes.bool,
+  autosize: PropTypes.bool,
+  placeholder: PropTypes.string,
+  clearable: PropTypes.bool,
+  maxlength: PropTypes.number,
+  minlength: PropTypes.number,
+  showPassword: PropTypes.bool,
+  rows: PropTypes.number,
+  cols: PropTypes.number,
+}
 
-  private readonly dispatch!: Function;
+export default defineComponent({
+  name: 'FsInput',
+  props: {
+    ...inputProps
+  },
+  setup(props, { emit, attrs }) {
 
-  @Prop({ type: String, required: false, default: 'text' })
-  private readonly type!: string;
+    const textarea = ref(null);
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly disabled!: boolean;
+    let innerValue: Ref<string> = ref('')
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly readonly!: boolean;
+    let focused: Ref<boolean> = ref(false)
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly autosize!: boolean;
+    let showClear: Ref<boolean | undefined> = ref(false)
 
-  @Prop({ type: String, required: false, default: '请输入内容' })
-  private readonly placeholder!: string;
+    let showPsd: Ref<boolean> = ref(false)
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly clearable!: boolean;
+    const inputShowPassword = computed((): boolean => {
+      return (props.type == 'password' && props.showPassword) || false
+    })
 
-  @Prop({ type: Number, required: false, default: -1 })
-  private readonly maxlength!: number;
+    const inputDisabled = computed((): boolean => {
+      return props.disabled || false;
+    })
 
-  @Prop({ type: Number, required: false, default: -1 })
-  private readonly minlength!: number;
+    const validateState = computed((): boolean => {
+      return false
+    })
 
-  @Prop({ type: Boolean, required: false, default: false })
-  private readonly showPassword!: boolean;
-
-  @Prop({ type: Number, required: false, default: 3 })
-  private readonly rows!: number;
-
-  @Prop({ type: Number, required: false, default: 80 })
-  private readonly cols!: number;
-
-  private innerValue = '';
-
-  private focused = false;
-
-  private showClear = false;
-
-  private showPsd = false;
-
-  private created() {
-    this.innerValue = this.$attrs.value;
-  }
-
-  private get inputDisabled(): boolean {
-    return this.disabled;
-  }
-
-  private get inputShowPassword(): boolean {
-    return this.type == 'password' && this.showPassword
-  }
-
-  private mounted() {
-    if (this.autosize) {
-      this.makeExpandingArea(this.$refs.textarea)
-    }
-  }
-
- 
-
-  private onInput(e: Event) {
-    const { value = '' }: any = e.target || {};
-    this.innerValue = value;
-    this.setShowClear();
-    this.$emit('input', this.innerValue);
-    // this.dispatch('FsFormItem', 'on-form-change', value)
-  }
-
-  private onFocus(e: Event) {
-    this.focused = true;
-    this.setShowClear();
-    this.$emit('focus', e);
-  }
-
-  private onBlur(e: Event) {
-    this.focused = false;
-    this.setShowClear();
-    this.$emit('blur', e);
-  }
-
-  private onClear() {
-    this.innerValue = '';
-    this.focused = false;
-    this.setShowClear();
-    this.$emit('input', this.innerValue);
-  }
-
-  private onShowPassword() {
-    this.showPsd = !this.showPsd;
-  }
-
-  private setShowClear() {
-    this.showClear = this.clearable && this.focused && !!this.innerValue && !this.readonly && !this.showPassword
-  }
-
-  private makeExpandingArea(el: Element | any) {
-    let timer: number | null = null;
-
-    let setStyle = function (el: Element | any, auto?: number | undefined) {
-      if (auto) el.style.height = 'auto';
-      el.style.height = el.scrollHeight + 'px';
-    }
-    let delayedResize = function (el: Element) {
-      if (timer) {
-        clearTimeout(timer);
-        timer = null;
+    onMounted(() => {
+      innerValue.value = attrs.value;
+      if (props.autosize) {
+        makeExpandingArea(textarea.value)
       }
-      timer = setTimeout(function () {
-        setStyle(el)
-      }, 200);
+    })
+
+    const onInput = (e: InputEvent) => {
+      const { value = '' }: any = e.target || {};
+      innerValue.value = value;
+      setShowClear();
+      emit('input', innerValue.value);
+      // dispatch('FsFormItem', 'on-form-change', value)
     }
-    if (el.addEventListener) {
-      el.addEventListener('input', function () {
-        setStyle(el, 1);
-      }, false);
-      setStyle(el)
-    } else if (el.attachEvent) {
-      el.attachEvent('onpropertychange', function () {
-        setStyle(el)
+
+    const onFocus = (e: Event) => {
+      focused.value = true;
+      setShowClear();
+      emit('focus', e);
+    }
+
+    const onBlur = (e: Event) => {
+      focused.value = false;
+      setShowClear();
+      emit('blur', e);
+    }
+
+    const onClear = () => {
+      innerValue.value = '';
+      focused.value = false;
+      setShowClear();
+      emit('input', innerValue.value);
+    }
+
+    const onShowPassword = () => {
+      showPsd.value = !showPsd.value;
+    }
+
+    const setShowClear = () => {
+      showClear.value = props.clearable && focused.value && !!innerValue.value && !props.readonly && !props.showPassword
+    }
+
+
+    const getClassName = (type: string, child: string = ''): string => {
+      const prefix = `fs-${type}${child}`
+      return classNames(prefix, {
+        [`${prefix}-error`]: this
       })
-      setStyle(el)
     }
-    if (window.VBArray && window.addEventListener) { //IE9
-      el.attachEvent("onkeydown", function () {
-        let key = win.event.keyCode;
-        if (key == 8 || key == 46) delayedResize(el);
 
-      });
-      el.attachEvent("oncut", function () {
-        delayedResize(el);
-      }); //处理粘贴
+    const getClassIcon = (icon: string): string => {
+      const prefix = 'fs-input'
+      return classNames({
+        [`${prefix}__inner-icon`]: true,
+        [`icon iconfont icon-icon-test${icon}`]: true
+      })
     }
-  }
 
-  private rIcon(t: string): string {
-   return `fs-input__inner-icon icon iconfont icon-icon-test${t}`
-  }
-
-  private rSpan(type: string): VNode | null {
+    const rSpan = (type: string): VNode | null => {
       return (
         <div>
-          { this.showClear ? <span class={ this.rIcon('44') } onmousedown={this.onClear} /> : ''  } 
-          { this.inputShowPassword ?  <span class={ this.rIcon(this.showPsd ? '1' : '')} onmousedown={this.onShowPassword} /> : null } 
-          { type == 'textarea' && this.maxlength > 0 ? <span class="fs-textarea__count"> {this.innerValue.length} / {this.maxlength} </span> : null}
+          {showClear.value ? <span class={getClassIcon('44')} onmousedown={onClear} /> : null}
+          {inputShowPassword.value ? <span class={getClassIcon(showPsd.value ? '1' : '')} onmousedown={onShowPassword} /> : null}
+          {type == 'textarea' && props.maxlength > 0 ? <span class="fs-textarea__count"> {innerValue.value.length} / {props.maxlength} </span> : null}
         </div>
       )
-  }
-
-  private rInput(): VNode {
-    return (
-      <div class='fs-input'>
-        <input
-          class='fs-input__inner'
-          v-model={this.innerValue}
-          maxlength={this.maxlength}
-          minlength={this.minlength}
-          disabled={this.inputDisabled}
-          placeholder={this.placeholder}
-          readonly={this.readonly}
-          type={this.type == 'password' ? this.showPsd ? 'text' : this.type : this.type}
-          onInput={this.onInput}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-        >
-        </input>
-        { this.rSpan('input') }
-      </div>
-    );
-  }
-
-  private rTextarea(): VNode {
-    return (
-      <div class='fs-textarea'>
-        <textarea
-          ref="textarea"
-          class='fs-textarea__inner'
-          v-model={this.innerValue}
-          maxlength={this.maxlength}
-          minlength={this.minlength}
-          disabled={this.inputDisabled}
-          placeholder={this.placeholder}
-          readonly={this.readonly}
-          type='textarea'
-          onInput={this.onInput}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          rows={this.rows}
-          cols={this.cols}
-        >
-        </textarea>
-        { this.rSpan('textarea') }
-      </div>
-    )
-  }
-
-  private render() {
-    if (this.type == 'textarea') {
-      return this.rTextarea()
     }
-    return this.rInput()
 
-  }
-} 
+    const rInput = (): VNode => {
+      return (
+        <div class={getClassName('input')}>
+          <input
+            class={getClassName('input', '__inner')}
+            v-model={innerValue.value}
+            maxlength={props.maxlength}
+            minlength={props.minlength}
+            disabled={inputDisabled.value}
+            placeholder={props.placeholder}
+            readonly={props.readonly}
+            type={props.type == 'password' ? showPsd.value ? 'text' : props.type : props.type}
+            onInput={onInput}
+            onFocus={onFocus}
+            onBlur={onBlur}
+          >
+          </input>
+          {rSpan('input')}
+
+        </div>
+      );
+    }
+
+    const rTextarea = (): VNode => {
+      return (
+        <div class={getClassName('textarea')}>
+          <textarea
+            ref="textarea"
+            class={getClassName('textarea', '__inner')}
+            v-model={innerValue.value}
+            maxlength={props.maxlength}
+            minlength={props.minlength}
+            disabled={inputDisabled.value}
+            placeholder={props.placeholder}
+            readonly={props.readonly}
+            type='textarea'
+            onInput={onInput}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            rows={props.rows}
+            cols={props.cols}
+          >
+          </textarea>
+          {rSpan('textarea')}
+        </div>
+      )
+    }
+
+    return () => {
+      if (props.type == 'textarea') {
+        return rTextarea()
+      }
+      return rInput();
+    };
+  },
+});

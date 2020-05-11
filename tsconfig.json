@@ -6,19 +6,10 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
-    "paths": {
-      "@/*": [
-        "examples/*"
-      ]
-    },
     "lib": [
       "esnext",
       "dom",
@@ -29,11 +20,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "examples/**/*.ts",
-    "examples/**/*.tsx",
-    "examples/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx", "examples/main.js"
+    "**/*.vue",
   ],
   "exclude": [
     "node_modules"

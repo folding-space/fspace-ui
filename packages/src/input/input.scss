@@ -6,9 +6,7 @@
 @include b(input) {
     position: relative;
     width: 250px;
-    height: auto;
-    min-height: 35px;
-   
+    height: 35px;
 
     &__inner {
         position: absolute;
@@ -19,7 +17,9 @@
         outline:none;  
         border: 1px solid #eeeeee;
 
-        &:focus{
+        // $border-color: darken($startcolor); 
+
+        &:focus {
             border: 1px solid $--color-info;
             border-radius: 1px solid $--color-info;
         }
@@ -32,13 +32,21 @@
             -ms-transform: translate(-50%,-50%);
             transform: translate(0,-50%);
         }
+
+        &-error {
+            border:  1px solid $--color-danger;
+            border-color: 1px solid $--color-danger;
+        }
     }
+
+   
 }
 
 
 @include b(textarea) {
     width: auto;
     position: relative;
+    display: inline-block;
 
     &__inner {
         padding: 5px;
@@ -59,7 +67,7 @@
         background: #fff;
         position: absolute;
         font-size: 12px;
-        bottom: 5px;
+        bottom: 10px;
         right: 10px;
     }
 }

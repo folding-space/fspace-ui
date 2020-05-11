@@ -1,0 +1,45 @@
+@charset "utf-8";
+@import '../../../styles/mixins/mixins';
+
+@include b(row) {
+  display: flex;
+  &.jccenter {
+    justify-content: center;
+  }
+  &.jcstart {
+    justify-content: flex-start;
+  }
+  &.jcend {
+    justify-content: flex-end;
+  }
+  &.jcbetween {
+    justify-content: space-between;
+  }
+  &.jcaround {
+    justify-content: space-around;
+  }
+  &.aistart {
+    align-items: flex-start;
+  }
+  &.aiend {
+    align-items: flex-end;
+  }
+  &.aicenter {
+    align-items: center;
+  }
+  &.aibaseline {
+    align-items: baseline;
+  }
+  &.aistretch {
+    align-items: stretch;
+  }
+  &.nowrap {
+    flex-wrap: nowrap;
+  }
+  &.wrap {
+    flex-wrap: wrap;
+  }
+  &.reverse {
+    flex-wrap: wrap-reverse;
+  }
+}
