@@ -1,14 +1,72 @@
 $namespace: 'fs';
+//tag颜色
+$color-defaulte:#409eff;
+$border-defaulte:#d9ecff;
+$back-defaulte:#ecf5ff;
+$color-success:#67c23a;
+$border-success:#e1f3d8;
+$back-success:#f0f9eb;
+$color-info:#909399;
+$border-info:#e9e9eb;
+$back-info:#f4f4f5;
+//tag大小
+$sizeDaW:100px;
+$sizeDaH:25px;
+$sizeZhongW:80px;
+$sizeZhongH:25px;
+$sizeXiaoW:60px;
+$sizeXiaoH:25px;
 
 @mixin b($block) {
   $B: $namespace+'-'+$block !global;
-
   .#{$B} {
     @content;
   }
 }
+//--------------------------tag(开始)
+@mixin tagColor($color:defaulte) {
+@if $color=='defaulte' {
+    border: 1px solid $border-defaulte;
+    color: $color-defaulte;
+    background: $back-defaulte;
+}
 
-@mixin keyframes($animationName) {
+@if $color=='info' {
+  border: 1px solid $border-info;
+  color: $color-info;
+  background:  $back-info;
+  
+}
+@if $color=='success' {
+  border: 1px solid $border-success;
+  color: $color-success;
+  background:  $back-success;
+  
+}
+}
+@mixin hitTag($hitTag) {
+    @if $hitTag==false{
+      border: none ;
+    }
+  
+}
+@mixin commonHit($name) {
+  @each $hit in (false,true) {
+    .#{$name}#{$hit} {
+      @include hitTag($hit);
+    }
+  }
+}
+@mixin commonType($name) {
+  @each $type in (defaulte,success,info) {
+    .#{$name}#{$type}{
+      @include tagColor($type)
+    }
+  }
+}
+//--------------------------tag(结束)
+
+ @mixin keyframes($animationName) {
   @-webkit-keyframes #{$animationName} {
       @content;
   }
@@ -21,4 +79,7 @@ $namespace: 'fs';
   @keyframes #{$animationName} {
       @content;
   }
-}
+
+ }
+
+

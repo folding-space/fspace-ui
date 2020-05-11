@@ -1,0 +1,72 @@
+@charset "utf-8";
+@import '../../styles/mixins/mixins';
+@import '../../styles/common/var';
+
+// .transition-name-enter-active,.transition-name-leave-active{
+//     // -webkit-transition:all .3s cubic-bezier(.55,0,.1,1);
+//     // transition:all 2s cubic-bezier(.55,0,.1,1)
+//     // animation:myFirst .5s;
+//     // animation-fill-mode : forwards;
+// }
+.transition-name-enter,.transition-name-leave-active{
+    animation:myFirst .5s;
+    animation-fill-mode : forwards;
+}
+
+@include b(tag) {
+    position: relative;
+    // @include tagSize(da);
+    margin-top:10px;
+    font-size: 10px;
+    border-radius: 5px;
+    @at-root { 
+        @include commonType(fs-tag_)
+    };
+    @at-root { 
+        @include commonHit(fs-tag_)
+    };
+    &_fork {
+        position: absolute;
+        top: 50%; 
+        right: 1px;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(0,-50%);
+        &:hover{
+            cursor:pointer
+        }
+    }
+    &_word {
+        position: absolute;
+        top: 50%; 
+        left: 20%;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(0,-50%);
+    }
+    &_da{
+        width:$sizeDaW;
+        height:$sizeDaH;
+      }
+    &_zhong{
+        width:$sizeZhongW;
+        height:$sizeZhongH;
+      }
+    &_xiao{
+        width:$sizeXiaoW;
+        height:$sizeXiaoH;
+      }
+}
+
+@keyframes myFirst{
+    0%{
+        transform:rotateX(0);
+        transform:rotateY(0);
+    }
+    100%{
+        transform:rotateX(90deg);
+        transform:rotateY(90deg);
+    }
+}
+
+

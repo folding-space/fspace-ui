@@ -7,7 +7,7 @@ lang="zh"
 ## 基础用法
 
 <div style="margin-top: 10px;">
-  <fs-button style="margin-right: 5px;">NORMAL</fs-button>
+  <fs-button  style="margin-right: 5px;">NORMAL</fs-button>
   <fs-button style="margin-right: 5px;" type="primary">PRIMARY</fs-button>
   <fs-button style="margin-right: 5px;" type="success">SUCCESS</fs-button>
   <fs-button style="margin-right: 5px;" type="info">INFO</fs-button>
