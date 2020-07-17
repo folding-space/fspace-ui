@@ -1,4 +1,4 @@
-import { PropTypes } from '../utils/vue-types';
+import { PropTypes } from "../utils/vue-types";
 
 const dialogProps = {
   /**
@@ -38,7 +38,7 @@ const dialogProps = {
   /**
    * 是否可以通过按escape键关闭 Dialog
    */
-  closeOnPressEscape:PropTypes.bool,
+  closeOnPressEscape: PropTypes.bool,
 
   /**
    * 是否显示关闭按钮
@@ -83,7 +83,7 @@ const dialogProps = {
   /**
    * dialog是否需要圆角
    */
-  borderRadius:PropTypes.bool,
+  borderRadius: PropTypes.bool,
 
   /**
    * 关闭前的回调，会暂停 Dialog 的关闭
@@ -92,6 +92,4 @@ const dialogProps = {
   beforeClose: PropTypes.any,
 };
 
-export {
-  dialogProps
-}
+export { dialogProps };

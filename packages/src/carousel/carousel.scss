@@ -1,0 +1,47 @@
+@charset "utf-8";
+@import '../../styles/mixins/mixins';
+@import '../../styles/common/var';
+
+
+@include b(carousel-container){
+  position: relative;
+  width: 800px;
+  height: 400px;
+  @include b(prev-arrow-container){
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 100%;
+    @include b(prev-arrow-box){
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      background-color: orange;
+    }
+  }
+  @include b(next-arrow-container){
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 100%;
+    @include b(next-arrow-box){
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      background-color: orange;
+    }
+  }
+  @include b(carousel-box){
+    width: 100%;
+    height: 100%;
+    background-color: orchid;
+  }
+}

@@ -9,7 +9,9 @@ import FsCheckbox from './src/checkbox'
 import FsCheckboxGroup from './src/checkbox-group'
 import FsRow from './src/layout/row/row'
 import FsCol from './src/layout/col/col'
+import FsDrawer from './src/drawer/drawer'
 import FsDialog from './src/dialog/dialog'
+import FsCarousel from './src/carousel/carousel'
 
 const components = [
     FsInput,
@@ -24,6 +26,8 @@ const components = [
     FsRow,
     FsDialog,
     FsCol,
+    FsDrawer,
+    FsCarousel,
     
 ]
 
@@ -50,4 +54,6 @@ export default {
     FsRow,
     FsCol,
     FsDialog,
+    FsDrawer,
+    FsCarousel,
 };
