@@ -62,6 +62,19 @@ export default defineComponent({
       console.log(slots.dots(), "slots.dots");
       emit("next");
     };
+
+    /**
+     * dots的样式
+     */
+    const spotOrLine = ():VNode=>{
+      if(props.spotOrLine === "spot"){
+        return <div></div>
+      }
+      if(props.spotOrLine === "line"){
+        return <div></div>
+      }
+      return <span></span>
+    }
     
     return () => {
       return (

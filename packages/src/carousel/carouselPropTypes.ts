@@ -44,6 +44,13 @@ const carouselProps = {
    */
   effect: PropTypes.string,
 
+  
+  /**
+   * dots的风格，可取 spot, line
+   */
+  spotOrLine: PropTypes.string,
+
+
   /**
    * 切换面板后的回调
    * @param current
