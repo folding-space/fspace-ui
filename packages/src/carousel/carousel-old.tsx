@@ -117,7 +117,6 @@ export default class FsCarousel extends Vue {
     this.$emit("next");
   }
   private render() {
-    
     return (
       <div class="fs-carousel-container" style={this.getCarouselSize()}>
         {this.$slots.prevArrow ? (

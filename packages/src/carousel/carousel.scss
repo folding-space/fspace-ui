@@ -98,17 +98,48 @@
     }
   }
 }
-.carousel-fade-enter-active {
-  animation: carousel-fade-in 1s;
+//向后一个
+.carousel-fade-next-enter-active {
+  animation: carousel-fade-next-in 1s ease-in;
 }
 
-.carousel-fade-leave-active {
-  animation: carousel-fade-out 0.1s;
+.carousel-fade-next-leave-active {
+  animation: carousel-fade-next-out 0.5s ease-out;
 }
 
-@keyframes carousel-fade-in {
+@keyframes carousel-fade-next-in {
   0% {
     transform: translate3d(-100%, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes carousel-fade-next-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+    opacity: 1;
+  }
+}
+//向前一个
+.carousel-fade-prev-enter-active {
+  animation: carousel-fade-prev-in 1s;
+}
+
+.carousel-fade-prev-leave-active {
+  animation: carousel-fade-prev-out 1s;
+}
+
+@keyframes carousel-fade-prev-in {
+  0% {
+    transform: translate3d(100%, 0, 0);
     opacity: 0;
   }
   100% {
@@ -117,13 +148,13 @@
   }
 }
 
-@keyframes carousel-fade-out {
+@keyframes carousel-fade-prev-out {
   0% {
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
   100% {
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
     opacity: 0;
   }
 }

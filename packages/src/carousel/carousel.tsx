@@ -9,11 +9,7 @@ import { VNode } from "vue/types/umd";
 import classNames from "classnames";
 import { carouselProps } from "./carouselPropTypes";
 import "./carousel.scss";
-
-interface keyEvent {
-  keyCode: number;
-  key: string;
-}
+ 
 /**
  * 主要分为三部分：1：滚动的组件 2：dots 3：arrow
  * 一、滚动组件，监听鼠标事件：mouseenter， mouseover， mouseleave，用来控制dots和arrow的显示，
@@ -28,6 +24,7 @@ export default defineComponent({
     ...carouselProps,
   },
   setup(props, context) {
+    console.log(context)
     const { emit, slots } = context;
     /** 获取轮播滚动组件的数量 */
     const dotsNumber = reactive({ count: 0 });
@@ -35,6 +32,10 @@ export default defineComponent({
     const isShowDotsAndArrow = reactive({ count: false });
     /** 显示的滚动组件的key */
     const carouselKey = reactive({ count: 0 });
+    /** 动画的方向 */
+    const animationDirection = reactive({ direction: "carousel-fade-next" });
+    /** 生命周期是否跑完 */
+    const lifeCycleEnd = reactive({end:false})
     /**
      * 获取滚动的dot的数量/滚动组件的数量
      */
@@ -67,6 +68,7 @@ export default defineComponent({
      * 点击上一个
      */
     const prevArrowClick = (e: Event) => {
+      animationDirection.direction = "carousel-fade-prev";
       if (e) {
         e.preventDefault();
       }
@@ -83,6 +85,7 @@ export default defineComponent({
      * 点击下一个
      */
     const nextArrowClick = (e: Event) => {
+      animationDirection.direction = "carousel-fade-next";
       if (e) {
         e.preventDefault();
       }
@@ -135,6 +138,8 @@ export default defineComponent({
       if (e) {
         e.preventDefault();
       }
+      animationDirection.direction =
+        carouselKey.count < index ? "carousel-fade-next" : "carousel-fade-prev";
       carouselKey.count = index;
       console.log(slots.default());
     };
@@ -155,12 +160,13 @@ export default defineComponent({
       let itemIndex = 0;
       slots.default().forEach((item: any, index) => {
         if (item.tag) {
-          item.key = itemIndex;
+          item.keyCode = itemIndex;
           itemIndex++;
         }
       });
+      lifeCycleEnd.end = true;
     });
-    onBeforeMount(()=>{
+    onBeforeMount(() => {
       setInterval(() => {
         if (!isShowDotsAndArrow.count) {
           if (carouselKey.count === dotsNumber.count - 1) {
@@ -170,62 +176,64 @@ export default defineComponent({
           }
         }
       }, 2000);
-    })
-    
-
+    });
     return () => {
-      return (
-        <div
-          class="fs-carousel-container"
-          style={getCarouselSize()}
-          onMouseover={() => showDotsAndArrowFunc()}
-          onMouseenter={() => showDotsAndArrowFunc()}
-          onMouseleave={() => hideDotsAndArrowFunc()}
-        >
-          {isShowDotsAndArrow.count ? (
-            <div class="fs-prev-arrow-container">
-              <div
-                class="fs-prev-arrow-box"
-                onClick={(e: Event) => prevArrowClick(e)}
-              >
-                <span class="iconfont" style="font-size:18px;font-weight:600">
-                  &#xe66e;
-                </span>
+      if (lifeCycleEnd.end) {
+        return (
+          <div
+            class="fs-carousel-container"
+            style={getCarouselSize()}
+            onMouseover={() => showDotsAndArrowFunc()}
+            onMouseenter={() => showDotsAndArrowFunc()}
+            onMouseleave={() => hideDotsAndArrowFunc()}
+          >
+            {isShowDotsAndArrow.count ? (
+              <div class="fs-prev-arrow-container">
+                <div
+                  class="fs-prev-arrow-box"
+                  onClick={(e: Event) => prevArrowClick(e)}
+                >
+                  <span class="iconfont" style="font-size:18px;font-weight:600">
+                    &#xe66e;
+                  </span>
+                </div>
               </div>
-            </div>
-          ) : (
-            ""
-          )}
-          {slots.default().map((item: any) => {
-            return (
-              <transition name="carousel-fade">
-                {item.key === carouselKey.count ? (
-                  <div class="fs-carousel-box">{item}</div>
-                ) : null}
-              </transition>
-            );
-          })}
-          {isShowDotsAndArrow.count ? (
-            <div class="fs-next-arrow-container">
-              <div
-                class="fs-next-arrow-box"
-                onClick={(e: Event) => nextArrowClick(e)}
-              >
-                <span class="iconfont" style="font-size:18px;font-weight:600">
-                  &#xe670;
-                </span>
+            ) : (
+              ""
+            )}
+            {slots.default().map((item: any) => {
+              return (
+                <transition name={animationDirection.direction}>
+                  {item.keyCode === carouselKey.count ? (
+                    <div class="fs-carousel-box">{item}</div>
+                  ) : null}
+                </transition>
+              );
+            })}
+            {isShowDotsAndArrow.count ? (
+              <div class="fs-next-arrow-container">
+                <div
+                  class="fs-next-arrow-box"
+                  onClick={(e: Event) => nextArrowClick(e)}
+                >
+                  <span class="iconfont" style="font-size:18px;font-weight:600">
+                    &#xe670;
+                  </span>
+                </div>
               </div>
-            </div>
-          ) : (
-            ""
-          )}
-          {isShowDotsAndArrow.count ? (
-            <div class="fs-carousel-dots-box">{spotOrLine()}</div>
-          ) : (
-            ""
-          )}
-        </div>
-      );
+            ) : (
+              ""
+            )}
+            {isShowDotsAndArrow.count ? (
+              <div class="fs-carousel-dots-box">{spotOrLine()}</div>
+            ) : (
+              ""
+            )}
+          </div>
+        );
+      } else {
+        return "";
+      }
     };
   },
 });
