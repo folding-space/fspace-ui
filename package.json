@@ -30,7 +30,7 @@
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
     "lodash": "^4.17.15",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^8.0.2",
     "sockjs-client": "^1.4.0",
     "ts-loader": "^6.0.0",
